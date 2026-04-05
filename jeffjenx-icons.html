@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[JJ] Jeff Jenx · Iconography</title>
+<meta name="description" content="Jeff Jenx icon generator and export tool.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="icon" href="jeffjenx-icon-light-256x256.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="jeffjenx-icon-dark-256x256.png" media="(prefers-color-scheme: dark)">
+
+<style>
+/* ============================================================
+   TOKENS (inline — no external dep for portability)
+   ============================================================ */
+:root {
+  --jj-black:        #0a0a0a;
+  --jj-ink:          #1a1a1a;
+  --jj-charcoal:     #2a2a2a;
+  --jj-border:       #3a3a3a;
+  --jj-muted:        #888888;
+  --jj-silver:       #c8c8c8;
+  --jj-smoke:        #e8e8e8;
+  --jj-white:        #f8f8f8;
+
+  --jj-bg:           var(--jj-white);
+  --jj-bg-raised:    #ffffff;
+  --jj-bg-sunken:    var(--jj-smoke);
+  --jj-fg:           var(--jj-black);
+  --jj-fg-muted:     #555555;
+  --jj-fg-subtle:    var(--jj-muted);
+  --jj-border-color: var(--jj-silver);
+
+  /* category accents */
+  --jj-accent-gb:    #7B5EA7; --jj-accent-gb-light: #ede9f8;
+  --jj-accent-nes:   #9B1C1C; --jj-accent-nes-light:#fce8e8;
+  --jj-accent-xbx:   #107C10; --jj-accent-xbx-light:#e6f4e6;
+  --jj-accent-ps:    #003791; --jj-accent-ps-light: #e5f0fa;
+  --jj-accent-web:   #0066CC; --jj-accent-web-light:#e5f0fa;
+  --jj-accent-shop:  #C0A060; --jj-accent-shop-light:#faf4e5;
+  --jj-accent:       var(--jj-fg);
+  --jj-accent-light: var(--jj-bg-sunken);
+
+  --jj-font-mono: "IBM Plex Mono","Courier New",monospace;
+  --jj-font-sans: "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+
+  --jj-text-2xs: 0.512rem;
+  --jj-text-xs:  0.640rem;
+  --jj-text-sm:  0.800rem;
+  --jj-text-base:1.000rem;
+  --jj-text-md:  1.250rem;
+  --jj-text-lg:  1.563rem;
+  --jj-text-xl:  1.953rem;
+
+  --jj-space-1: 0.25rem;
+  --jj-space-2: 0.5rem;
+  --jj-space-3: 0.75rem;
+  --jj-space-4: 1rem;
+  --jj-space-5: 1.25rem;
+  --jj-space-6: 1.5rem;
+  --jj-space-8: 2rem;
+  --jj-space-10:2.5rem;
+  --jj-space-12:3rem;
+  --jj-space-16:4rem;
+
+  --jj-radius-0:  0;
+  --jj-radius-sm: 2px;
+  --jj-radius-md: 4px;
+  --jj-radius-lg: 6px;
+
+  --jj-width-full: 1280px;
+  --jj-z-raised: 10;
+
+  --jj-duration-fast:   80ms;
+  --jj-duration-normal: 160ms;
+  --jj-ease: cubic-bezier(0.4,0,0.2,1);
+
+  --jj-weight-regular: 400;
+  --jj-weight-medium:  500;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --jj-bg:           var(--jj-ink);
+    --jj-bg-raised:    var(--jj-charcoal);
+    --jj-bg-sunken:    #111111;
+    --jj-fg:           var(--jj-white);
+    --jj-fg-muted:     #aaaaaa;
+    --jj-fg-subtle:    var(--jj-muted);
+    --jj-border-color: var(--jj-border);
+  }
+}
+[data-theme="dark"] {
+  --jj-bg:           var(--jj-ink);
+  --jj-bg-raised:    var(--jj-charcoal);
+  --jj-bg-sunken:    #111111;
+  --jj-fg:           var(--jj-white);
+  --jj-fg-muted:     #aaaaaa;
+  --jj-fg-subtle:    var(--jj-muted);
+  --jj-border-color: var(--jj-border);
+}
+[data-theme="light"] {
+  --jj-bg:           var(--jj-white);
+  --jj-bg-raised:    #ffffff;
+  --jj-bg-sunken:    var(--jj-smoke);
+  --jj-fg:           var(--jj-black);
+  --jj-fg-muted:     #555555;
+  --jj-fg-subtle:    var(--jj-muted);
+  --jj-border-color: var(--jj-silver);
+}
+[data-category="gb"]   { --jj-accent: var(--jj-accent-gb);   --jj-accent-light: var(--jj-accent-gb-light);   }
+[data-category="nes"]  { --jj-accent: var(--jj-accent-nes);  --jj-accent-light: var(--jj-accent-nes-light);  }
+[data-category="xbx"]  { --jj-accent: var(--jj-accent-xbx);  --jj-accent-light: var(--jj-accent-xbx-light);  }
+[data-category="ps"]   { --jj-accent: var(--jj-accent-ps);   --jj-accent-light: var(--jj-accent-ps-light);   }
+[data-category="web"]  { --jj-accent: var(--jj-accent-web);  --jj-accent-light: var(--jj-accent-web-light);  }
+[data-category="shop"] { --jj-accent: var(--jj-accent-shop); --jj-accent-light: var(--jj-accent-shop-light); }
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  font-size: 16px;
+  background: var(--jj-bg);
+  color: var(--jj-fg);
+  font-family: var(--jj-font-sans);
+  scroll-padding-top: 4rem;
+  -webkit-text-size-adjust: 100%;
+}
+body { min-height: 100vh; }
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: var(--jj-accent, var(--jj-fg)); text-underline-offset: 3px; }
+a:hover { opacity: 0.75; }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.ic-nav {
+  position: sticky; top: 0;
+  z-index: var(--jj-z-raised);
+  background: var(--jj-bg);
+  border-bottom: 1px solid var(--jj-border-color);
+  padding: var(--jj-space-3) var(--jj-space-6);
+  display: flex; align-items: center;
+  justify-content: space-between; gap: var(--jj-space-4);
+  flex-wrap: wrap;
+}
+.ic-nav-links {
+  display: flex; gap: var(--jj-space-4);
+  flex-wrap: wrap; list-style: none;
+}
+.ic-wrap {
+  max-width: var(--jj-width-full);
+  margin: 0 auto;
+  padding: 0 var(--jj-space-6);
+}
+.ic-main {
+  padding: var(--jj-space-12) 0;
+  display: flex; flex-direction: column; gap: var(--jj-space-12);
+}
+.ic-section {
+  display: flex; flex-direction: column; gap: var(--jj-space-6);
+}
+.ic-section-header {
+  border-bottom: 1px solid var(--jj-border-color);
+  padding-bottom: var(--jj-space-4);
+  display: flex; flex-direction: column; gap: var(--jj-space-2);
+}
+.ic-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--jj-space-4);
+}
+.ic-row {
+  display: flex; flex-wrap: wrap; gap: var(--jj-space-3);
+  align-items: flex-start;
+}
+.ic-col {
+  display: flex; flex-direction: column; gap: var(--jj-space-3);
+}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+.ic-layer-badge {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xs);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--jj-fg-subtle);
+}
+.ic-section-title {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xl);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: -0.03em; color: var(--jj-fg);
+  line-height: 1.2;
+}
+.ic-lead {
+  font-family: var(--jj-font-sans);
+  font-size: var(--jj-text-base);
+  line-height: 1.6; color: var(--jj-fg-muted); max-width: 68ch;
+}
+
+.ic-card {
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-lg);
+  padding: var(--jj-space-6);
+  display: flex; flex-direction: column; gap: var(--jj-space-4);
+}
+.ic-card-title {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-sm);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--jj-fg);
+}
+
+.jj-label {
+  display: block;
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xs);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--jj-fg-muted);
+  margin-bottom: var(--jj-space-2);
+}
+.jj-select, .jj-input-num, .jj-input-range {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-sm);
+  color: var(--jj-fg);
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-md);
+  padding: var(--jj-space-2) var(--jj-space-3);
+  transition: border-color var(--jj-duration-fast);
+  -webkit-appearance: none; appearance: none;
+}
+.jj-select:focus, .jj-input-num:focus { outline: none; border-color: var(--jj-fg); }
+.jj-input-num { width: 90px; }
+.jj-input-range { padding: var(--jj-space-1) 0; width: 100%; cursor: pointer; }
+
+.jj-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--jj-space-2);
+  padding: var(--jj-space-3) var(--jj-space-5);
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-sm);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: 0.06em; line-height: 1;
+  border-radius: var(--jj-radius-md);
+  cursor: pointer; text-decoration: none;
+  border: 1px solid transparent;
+  transition: background var(--jj-duration-fast) var(--jj-ease),
+              color var(--jj-duration-fast) var(--jj-ease),
+              border-color var(--jj-duration-fast) var(--jj-ease);
+  white-space: nowrap;
+}
+.jj-btn:focus-visible { outline: 2px solid var(--jj-fg); outline-offset: 2px; }
+.jj-btn--primary {
+  background: var(--jj-fg); color: var(--jj-bg); border-color: var(--jj-fg);
+}
+.jj-btn--primary:hover { background: var(--jj-charcoal); border-color: var(--jj-charcoal); opacity: 1; }
+.jj-btn--secondary {
+  background: transparent; color: var(--jj-fg); border-color: var(--jj-border-color);
+}
+.jj-btn--secondary:hover { background: var(--jj-bg-sunken); opacity: 1; }
+.jj-btn--ghost {
+  background: transparent; color: var(--jj-fg-muted); border-color: transparent;
+}
+.jj-btn--ghost:hover { background: var(--jj-bg-sunken); color: var(--jj-fg); opacity: 1; }
+.jj-btn--sm { padding: var(--jj-space-2) var(--jj-space-3); font-size: var(--jj-text-xs); }
+.jj-btn--accent {
+  background: var(--jj-accent); color: var(--jj-white); border-color: var(--jj-accent);
+}
+.jj-btn--accent:hover { opacity: 0.85; }
+
+.jj-tag {
+  display: inline-flex; align-items: center;
+  padding: var(--jj-space-1) var(--jj-space-2);
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xs);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border-radius: var(--jj-radius-sm); line-height: 1.4; white-space: nowrap;
+}
+.jj-tag--solid   { background: var(--jj-fg); color: var(--jj-bg); }
+.jj-tag--outline { background: transparent; color: var(--jj-fg-muted); border: 1px solid var(--jj-border-color); }
+.jj-tag--accent  { background: var(--jj-accent-light); color: var(--jj-accent); }
+
+.jj-divider { border: none; border-top: 1px solid var(--jj-border-color); }
+
+.jj-nav-link {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-sm);
+  font-weight: var(--jj-weight-medium);
+  letter-spacing: 0.06em; color: var(--jj-fg-muted); text-decoration: none;
+  padding: var(--jj-space-1) 0; border-bottom: 2px solid transparent;
+  transition: color var(--jj-duration-fast), border-color var(--jj-duration-fast);
+}
+.jj-nav-link:hover { color: var(--jj-fg); border-bottom-color: var(--jj-fg); opacity: 1; }
+
+#theme-toggle {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: none; border: 1px solid var(--jj-border-color);
+  color: var(--jj-fg-muted);
+  padding: var(--jj-space-2) var(--jj-space-3);
+  border-radius: var(--jj-radius-md); cursor: pointer;
+}
+#theme-toggle:hover { background: var(--jj-bg-sunken); }
+
+.ic-lockup { display: inline-flex; align-items: center; gap: var(--jj-space-4); text-decoration: none; color: inherit; }
+.ic-lockup-text { display: flex; flex-direction: column; gap: 2px; }
+.ic-lockup-name {
+  font-family: var(--jj-font-mono); font-weight: var(--jj-weight-medium);
+  font-size: var(--jj-text-md); letter-spacing: -0.03em; line-height: 1; color: var(--jj-fg);
+}
+.ic-lockup-sub {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--jj-fg-subtle);
+}
+.jj-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  background: var(--jj-fg); color: var(--jj-bg);
+  font-family: var(--jj-font-mono); font-weight: var(--jj-weight-medium);
+  font-size: 1.25rem; letter-spacing: -0.03em;
+  border-radius: 0; flex-shrink: 0; line-height: 1; user-select: none;
+}
+
+/* ============================================================
+   ICON TOOL SPECIFIC
+   ============================================================ */
+.ic-workspace {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--jj-space-6);
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .ic-workspace { grid-template-columns: 1fr; }
+}
+
+.ic-controls {
+  display: flex; flex-direction: column; gap: var(--jj-space-4);
+  position: sticky; top: 80px;
+}
+.ic-control-group {
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-lg);
+  padding: var(--jj-space-5);
+  display: flex; flex-direction: column; gap: var(--jj-space-4);
+}
+.ic-control-group-title {
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xs);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--jj-fg-subtle);
+  padding-bottom: var(--jj-space-3);
+  border-bottom: 1px solid var(--jj-border-color);
+}
+
+.ic-preview-pane {
+  display: flex; flex-direction: column; gap: var(--jj-space-4);
+}
+
+.ic-canvas-wrap {
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-lg);
+  padding: var(--jj-space-6);
+  display: flex; flex-direction: column; gap: var(--jj-space-6); align-items: center;
+}
+
+.ic-canvas-stage {
+  display: flex; gap: var(--jj-space-8); align-items: center; flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ic-canvas-container {
+  display: flex; flex-direction: column; align-items: center; gap: var(--jj-space-3);
+}
+.ic-canvas-label {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--jj-fg-subtle);
+}
+
+/* checkerboard for transparent preview */
+.ic-canvas-bg-transparent {
+  background-image:
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  border-radius: var(--jj-radius-sm);
+  overflow: hidden;
+}
+.ic-canvas-bg-white  { background: #ffffff; border-radius: var(--jj-radius-sm); overflow: hidden; }
+.ic-canvas-bg-black  { background: #0a0a0a; border-radius: var(--jj-radius-sm); overflow: hidden; }
+.ic-canvas-bg-smoke  { background: var(--jj-smoke); border-radius: var(--jj-radius-sm); overflow: hidden; }
+
+canvas { display: block; image-rendering: pixelated; }
+
+.ic-size-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--jj-space-3);
+}
+.ic-size-item {
+  display: flex; flex-direction: column; align-items: center; gap: var(--jj-space-2);
+  cursor: pointer;
+}
+.ic-size-thumb {
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-sm);
+  overflow: hidden;
+  background: var(--jj-bg-sunken);
+  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px;
+  transition: border-color var(--jj-duration-fast);
+}
+.ic-size-item:hover .ic-size-thumb { border-color: var(--jj-fg); }
+.ic-size-item.active .ic-size-thumb { border-color: var(--jj-fg); border-width: 2px; }
+.ic-size-name {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  color: var(--jj-fg-muted); text-align: center;
+}
+.ic-size-px {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-2xs);
+  color: var(--jj-fg-subtle); text-align: center;
+}
+
+.ic-export-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--jj-space-3);
+}
+
+.ic-export-btn {
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: var(--jj-space-3) var(--jj-space-4);
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-md);
+  cursor: pointer; gap: var(--jj-space-1);
+  transition: border-color var(--jj-duration-fast), background var(--jj-duration-fast);
+  text-align: left;
+}
+.ic-export-btn:hover { border-color: var(--jj-fg); background: var(--jj-bg-sunken); }
+.ic-export-btn:focus-visible { outline: 2px solid var(--jj-fg); outline-offset: 2px; }
+.ic-export-btn-name {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-sm);
+  font-weight: var(--jj-weight-medium); color: var(--jj-fg);
+}
+.ic-export-btn-desc {
+  font-family: var(--jj-font-sans); font-size: var(--jj-text-xs);
+  color: var(--jj-fg-subtle); line-height: 1.5;
+}
+
+.ic-code-output {
+  background: var(--jj-bg-sunken);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-sm);
+  padding: var(--jj-space-4) var(--jj-space-5);
+  font-family: var(--jj-font-mono);
+  font-size: var(--jj-text-xs);
+  line-height: 1.8;
+  color: var(--jj-fg);
+  overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+  max-height: 200px; overflow-y: auto;
+  position: relative;
+}
+.ic-copy-btn {
+  position: absolute; top: var(--jj-space-2); right: var(--jj-space-2);
+}
+
+.ic-batch-list {
+  display: flex; flex-direction: column; gap: var(--jj-space-2);
+}
+.ic-batch-item {
+  display: flex; align-items: center; gap: var(--jj-space-3);
+  padding: var(--jj-space-2) var(--jj-space-3);
+  background: var(--jj-bg-raised);
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-sm);
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  color: var(--jj-fg-muted);
+}
+.ic-batch-check {
+  width: 16px; height: 16px;
+  border: 1px solid var(--jj-border-color);
+  border-radius: 2px;
+  cursor: pointer; flex-shrink: 0;
+}
+.ic-batch-size { min-width: 60px; color: var(--jj-fg); font-weight: var(--jj-weight-medium); }
+.ic-batch-desc { flex: 1; }
+.ic-batch-platform { margin-left: auto; }
+
+.ic-toggle-row {
+  display: flex; gap: var(--jj-space-2); flex-wrap: wrap;
+}
+.ic-toggle {
+  padding: var(--jj-space-2) var(--jj-space-3);
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  font-weight: var(--jj-weight-medium); letter-spacing: 0.06em;
+  border: 1px solid var(--jj-border-color); border-radius: var(--jj-radius-sm);
+  cursor: pointer; background: var(--jj-bg-raised); color: var(--jj-fg-muted);
+  transition: all var(--jj-duration-fast);
+}
+.ic-toggle.active {
+  background: var(--jj-fg); color: var(--jj-bg); border-color: var(--jj-fg);
+}
+.ic-toggle:hover:not(.active) { background: var(--jj-bg-sunken); color: var(--jj-fg); }
+
+.ic-dim-row {
+  display: flex; align-items: center; gap: var(--jj-space-3); flex-wrap: wrap;
+}
+.ic-link-icon {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-sm);
+  color: var(--jj-fg-subtle); cursor: pointer; user-select: none;
+  padding: var(--jj-space-1);
+}
+.ic-link-icon.linked { color: var(--jj-fg); }
+
+.ic-range-row {
+  display: flex; flex-direction: column; gap: var(--jj-space-2);
+}
+.ic-range-labels {
+  display: flex; justify-content: space-between;
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs); color: var(--jj-fg-subtle);
+}
+
+.ic-status {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  color: var(--jj-fg-subtle); letter-spacing: 0.06em;
+  padding: var(--jj-space-2) var(--jj-space-3);
+  background: var(--jj-bg-sunken);
+  border-radius: var(--jj-radius-sm);
+  border: 1px solid var(--jj-border-color);
+}
+.ic-status span { color: var(--jj-fg); font-weight: var(--jj-weight-medium); }
+
+.ic-platform-section {
+  display: flex; flex-direction: column; gap: var(--jj-space-4);
+}
+.ic-platform-header {
+  font-family: var(--jj-font-mono); font-size: var(--jj-text-xs);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--jj-fg-subtle);
+  display: block; margin-bottom: var(--jj-space-2);
+}
+
+/* scroll sync thumbnails */
+.ic-thumb-strip {
+  display: flex; gap: var(--jj-space-2); flex-wrap: wrap;
+}
+.ic-thumb {
+  border: 1px solid var(--jj-border-color);
+  border-radius: var(--jj-radius-sm); overflow: hidden;
+  cursor: pointer; transition: border-color var(--jj-duration-fast);
+}
+.ic-thumb:hover { border-color: var(--jj-fg); }
+.ic-thumb.active { border-color: var(--jj-fg); border-width: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="ic-nav" aria-label="Iconography tool navigation">
+  <a href="#" class="ic-lockup" aria-label="Jeff Jenx home">
+    <span class="jj-mark" aria-hidden="true">JJ</span>
+    <span class="ic-lockup-text">
+      <span class="ic-lockup-name">Jeff Jenx</span>
+      <span class="ic-lockup-sub">Iconography v1.0</span>
+    </span>
+  </a>
+  <ul class="ic-nav-links" role="list">
+    <li><a href="#generator" class="jj-nav-link">Generator</a></li>
+    <li><a href="#sizes"     class="jj-nav-link">Size Map</a></li>
+    <li><a href="#export"    class="jj-nav-link">Export</a></li>
+    <li><a href="#batch"     class="jj-nav-link">Batch</a></li>
+    <li><a href="#code"      class="jj-nav-link">Code</a></li>
+  </ul>
+  <button id="theme-toggle" aria-label="Toggle dark mode">Dark</button>
+</nav>
+
+<main class="ic-wrap">
+<div class="ic-main">
+
+  <!-- HERO -->
+  <div style="display:flex;align-items:center;gap:var(--jj-space-6)">
+    <span class="jj-mark" style="width:64px;height:64px;font-size:2.441rem;" aria-hidden="true">JJ</span>
+    <div>
+      <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xl);font-weight:500;color:var(--jj-fg);letter-spacing:-0.03em;line-height:1">Iconography</div>
+      <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);color:var(--jj-fg-subtle);letter-spacing:0.18em;text-transform:uppercase;margin-top:var(--jj-space-2)">Generate · Resize · Export · Every Platform</div>
+    </div>
+  </div>
+
+  <hr class="jj-divider">
+
+  <!-- 01 GENERATOR -->
+  <section class="ic-section" id="generator">
+    <div class="ic-section-header">
+      <span class="ic-layer-badge">01 · Generator</span>
+      <h2 class="ic-section-title">Icon builder</h2>
+      <p class="ic-lead">Configure the icon parameters and preview across all context backgrounds. Each size has refined padding ratios — not just a scale of one master file.</p>
+    </div>
+
+    <div class="ic-workspace">
+
+      <!-- CONTROLS -->
+      <div class="ic-controls" id="controls">
+
+        <!-- Label / Content -->
+        <div class="ic-control-group">
+          <div class="ic-control-group-title">Content</div>
+          <div>
+            <label class="jj-label" for="ctrl-label">Label text</label>
+            <input class="jj-input-num" id="ctrl-label" type="text" value="JJ" maxlength="4" style="width:100%;font-size:var(--jj-text-md);padding:var(--jj-space-3);">
+          </div>
+          <div>
+            <label class="jj-label">Variant</label>
+            <div class="ic-toggle-row" id="variant-toggles">
+              <button class="ic-toggle active" data-variant="light">Light</button>
+              <button class="ic-toggle" data-variant="dark">Dark</button>
+              <button class="ic-toggle" data-variant="accent">Accent</button>
+              <button class="ic-toggle" data-variant="transparent">Transparent</button>
+            </div>
+          </div>
+          <div id="accent-picker-wrap">
+            <label class="jj-label" for="ctrl-accent">Category accent</label>
+            <select class="jj-select" id="ctrl-accent" style="width:100%">
+              <option value="none">None (monochrome)</option>
+              <option value="gb">GB Indigo · #7B5EA7</option>
+              <option value="nes">NES Red · #9B1C1C</option>
+              <option value="xbx">XBX Green · #107C10</option>
+              <option value="ps">PS Blue · #003791</option>
+              <option value="web">WEB Blue · #0066CC</option>
+              <option value="shop">SHOP Gold · #C0A060</option>
+              <option value="custom">Custom…</option>
+            </select>
+          </div>
+          <div id="custom-color-wrap" style="display:none">
+            <label class="jj-label" for="ctrl-custom-color">Custom color</label>
+            <input type="color" id="ctrl-custom-color" value="#7B5EA7" style="width:100%;height:40px;border:1px solid var(--jj-border-color);border-radius:var(--jj-radius-md);padding:2px;cursor:pointer;background:var(--jj-bg-raised)">
+          </div>
+        </div>
+
+        <!-- Dimensions -->
+        <div class="ic-control-group">
+          <div class="ic-control-group-title">Dimensions</div>
+          <div class="ic-dim-row">
+            <div>
+              <label class="jj-label" for="ctrl-w">Width px</label>
+              <input class="jj-input-num" id="ctrl-w" type="number" value="512" min="8" max="4096" step="1">
+            </div>
+            <span class="ic-link-icon linked" id="link-toggle" title="Link width/height">⛓</span>
+            <div>
+              <label class="jj-label" for="ctrl-h">Height px</label>
+              <input class="jj-input-num" id="ctrl-h" type="number" value="512" min="8" max="4096" step="1">
+            </div>
+          </div>
+          <div class="ic-range-row">
+            <label class="jj-label">Quick size</label>
+            <input class="jj-input-range" type="range" id="ctrl-size-range" min="8" max="1024" value="512" step="1">
+            <div class="ic-range-labels"><span>8px</span><span id="range-val">512px</span><span>1024px</span></div>
+          </div>
+          <div>
+            <label class="jj-label" for="ctrl-preset">Preset sizes</label>
+            <select class="jj-select" id="ctrl-preset" style="width:100%">
+              <option value="">— choose preset —</option>
+              <optgroup label="Favicon">
+                <option value="16,16">16×16 · favicon.ico layer</option>
+                <option value="32,32">32×32 · favicon.ico layer / tab</option>
+                <option value="48,48">48×48 · Windows taskbar</option>
+              </optgroup>
+              <optgroup label="Apple / iOS">
+                <option value="57,57">57×57 · iOS home (non-retina)</option>
+                <option value="60,60">60×60 · iPhone home</option>
+                <option value="72,72">72×72 · iPad home</option>
+                <option value="76,76">76×76 · iPad home @1x</option>
+                <option value="114,114">114×114 · iPhone @2x</option>
+                <option value="120,120">120×120 · iPhone @2x</option>
+                <option value="152,152">152×152 · iPad @2x</option>
+                <option value="167,167">167×167 · iPad Pro</option>
+                <option value="180,180">180×180 · iPhone @3x</option>
+                <option value="1024,1024">1024×1024 · App Store</option>
+              </optgroup>
+              <optgroup label="Android / Google">
+                <option value="36,36">36×36 · ldpi</option>
+                <option value="48,48">48×48 · mdpi</option>
+                <option value="72,72">72×72 · hdpi</option>
+                <option value="96,96">96×96 · xhdpi</option>
+                <option value="144,144">144×144 · xxhdpi</option>
+                <option value="192,192">192×192 · xxxhdpi</option>
+                <option value="512,512">512×512 · Play Store</option>
+              </optgroup>
+              <optgroup label="Windows">
+                <option value="16,16">16×16 · Win 3.1 / small icon</option>
+                <option value="32,32">32×32 · Win 3.1 / normal icon</option>
+                <option value="48,48">48×48 · Win 95/98/XP normal</option>
+                <option value="64,64">64×64 · Win XP large</option>
+                <option value="128,128">128×128 · Vista+</option>
+                <option value="256,256">256×256 · Win 7+ / ICO</option>
+                <option value="512,512">512×512 · Win 10 store</option>
+              </optgroup>
+              <optgroup label="macOS">
+                <option value="16,16">16×16 · ICNS 16pt @1x</option>
+                <option value="32,32">32×32 · ICNS 16pt @2x / 32pt @1x</option>
+                <option value="64,64">64×64 · ICNS 32pt @2x</option>
+                <option value="128,128">128×128 · ICNS 128pt @1x</option>
+                <option value="256,256">256×256 · ICNS 128pt @2x / 256pt @1x</option>
+                <option value="512,512">512×512 · ICNS 256pt @2x / 512pt @1x</option>
+                <option value="1024,1024">1024×1024 · ICNS 512pt @2x</option>
+              </optgroup>
+              <optgroup label="Open Graph / Social">
+                <option value="1200,630">1200×630 · OG image (16:9 approx)</option>
+                <option value="1200,1200">1200×1200 · OG square</option>
+                <option value="800,800">800×800 · Twitter/X profile</option>
+                <option value="400,400">400×400 · Twitter/X profile small</option>
+              </optgroup>
+              <optgroup label="PWA / Manifest">
+                <option value="192,192">192×192 · PWA manifest</option>
+                <option value="512,512">512×512 · PWA manifest splash</option>
+              </optgroup>
+              <optgroup label="Legacy / Retro">
+                <option value="8,8">8×8 · CGA tile</option>
+                <option value="16,16">16×16 · NES tile</option>
+                <option value="32,32">32×32 · Win 3.1 icon</option>
+                <option value="24,24">24×24 · Win 3.1 toolbar</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="ic-control-group">
+          <div class="ic-control-group-title">Typography</div>
+          <div>
+            <label class="jj-label">Font scale</label>
+            <div class="ic-toggle-row" id="font-scale-toggles">
+              <button class="ic-toggle active" data-scale="auto">Auto</button>
+              <button class="ic-toggle" data-scale="manual">Manual</button>
+            </div>
+          </div>
+          <div id="manual-font-wrap" style="display:none">
+            <label class="jj-label" for="ctrl-fontsize">Font size (% of icon)</label>
+            <input class="jj-input-range" type="range" id="ctrl-fontsize" min="10" max="90" value="55" step="1">
+            <div class="ic-range-labels"><span>10%</span><span id="fontsize-val">55%</span><span>90%</span></div>
+          </div>
+          <div>
+            <label class="jj-label">Tracking</label>
+            <div class="ic-toggle-row" id="tracking-toggles">
+              <button class="ic-toggle active" data-tracking="-0.03em">Tight</button>
+              <button class="ic-toggle" data-tracking="0">Normal</button>
+              <button class="ic-toggle" data-tracking="0.06em">Wide</button>
+            </div>
+          </div>
+          <div>
+            <label class="jj-label">Weight</label>
+            <div class="ic-toggle-row" id="weight-toggles">
+              <button class="ic-toggle" data-weight="400">Regular</button>
+              <button class="ic-toggle active" data-weight="500">Medium</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corners & Padding -->
+        <div class="ic-control-group">
+          <div class="ic-control-group-title">Geometry</div>
+          <div>
+            <label class="jj-label">Corners</label>
+            <div class="ic-toggle-row" id="corner-toggles">
+              <button class="ic-toggle active" data-corner="0">Sharp (brand)</button>
+              <button class="ic-toggle" data-corner="10">Subtle</button>
+              <button class="ic-toggle" data-corner="20">Rounded</button>
+              <button class="ic-toggle" data-corner="50">Circle</button>
+              <button class="ic-toggle" data-corner="ios">iOS squircle</button>
+            </div>
+          </div>
+          <div>
+            <label class="jj-label">Background padding</label>
+            <input class="jj-input-range" type="range" id="ctrl-padding" min="0" max="30" value="0" step="1">
+            <div class="ic-range-labels"><span>0%</span><span id="padding-val">0%</span><span>30%</span></div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="ic-status" id="ic-status">
+          <span id="status-w">512</span>×<span id="status-h">512</span>px ·
+          <span id="status-variant">Light</span> ·
+          <span id="status-label">JJ</span>
+        </div>
+
+      </div><!-- /.ic-controls -->
+
+      <!-- PREVIEW PANE -->
+      <div class="ic-preview-pane">
+        <div class="ic-canvas-wrap">
+          <div class="ic-canvas-stage" id="canvas-stage">
+            <!-- Canvases injected by JS -->
+          </div>
+          <div style="display:flex;gap:var(--jj-space-3);flex-wrap:wrap;justify-content:center">
+            <span class="jj-tag jj-tag--outline" id="preview-dim-tag">512×512</span>
+            <span class="jj-tag jj-tag--outline" id="preview-variant-tag">Light</span>
+            <span class="jj-tag jj-tag--outline" id="preview-scale-tag">1:1 preview</span>
+          </div>
+        </div>
+
+        <!-- Pixel-accurate preview strip -->
+        <div class="ic-card">
+          <div class="ic-card-title">Pixel-accurate previews</div>
+          <p style="font-family:var(--jj-font-sans);font-size:var(--jj-text-sm);line-height:1.6;color:var(--jj-fg-muted)">
+            Each preview below is rendered at its actual pixel size. What you see is exactly what exports. Note how the relative text scale and padding shift at smaller sizes — this is intentional per-size tuning.
+          </p>
+          <div class="ic-thumb-strip" id="thumb-strip"></div>
+        </div>
+      </div>
+
+    </div><!-- /.ic-workspace -->
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 02 SIZE MAP -->
+  <section class="ic-section" id="sizes">
+    <div class="ic-section-header">
+      <span class="ic-layer-badge">02 · Size Map</span>
+      <h2 class="ic-section-title">Platform size reference</h2>
+      <p class="ic-lead">Every relevant icon size across every platform, from 8px CGA tiles to 1024px App Store artwork. Click any size to load it in the generator.</p>
+    </div>
+
+    <div id="size-platform-sections"></div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 03 EXPORT -->
+  <section class="ic-section" id="export">
+    <div class="ic-section-header">
+      <span class="ic-layer-badge">03 · Export</span>
+      <h2 class="ic-section-title">Export formats</h2>
+      <p class="ic-lead">Download the current canvas in any format. Code outputs are copied to clipboard. Every format except SVG is pixel-rendered from the canvas.</p>
+    </div>
+
+    <div class="ic-export-grid" id="export-grid"></div>
+
+    <div class="ic-card" id="code-output-card" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--jj-space-3)">
+        <div class="ic-card-title" id="code-output-title">Output</div>
+        <button class="jj-btn jj-btn--secondary jj-btn--sm" id="copy-code-btn">Copy</button>
+      </div>
+      <div class="ic-code-output" id="code-output-content"></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 04 BATCH -->
+  <section class="ic-section" id="batch">
+    <div class="ic-section-header">
+      <span class="ic-layer-badge">04 · Batch Export</span>
+      <h2 class="ic-section-title">Batch download</h2>
+      <p class="ic-lead">Select the sizes and variants you need, then download all as a ZIP. Generates both light and dark variants if selected. Naming follows the convention <code style="font-family:var(--jj-font-mono);font-size:0.875em;background:var(--jj-bg-sunken);padding:1px 5px;border-radius:2px">jeffjenx-icon-{variant}-{w}x{h}.{ext}</code>.</p>
+    </div>
+
+    <div style="display:flex;gap:var(--jj-space-3);flex-wrap:wrap;margin-bottom:var(--jj-space-4)">
+      <button class="jj-btn jj-btn--secondary jj-btn--sm" id="batch-select-all">Select all</button>
+      <button class="jj-btn jj-btn--ghost jj-btn--sm" id="batch-select-none">Select none</button>
+      <button class="jj-btn jj-btn--secondary jj-btn--sm" id="batch-select-web">Web essentials</button>
+      <button class="jj-btn jj-btn--secondary jj-btn--sm" id="batch-select-apple">Apple pack</button>
+      <button class="jj-btn jj-btn--secondary jj-btn--sm" id="batch-select-windows">Windows pack</button>
+      <button class="jj-btn jj-btn--secondary jj-btn--sm" id="batch-select-android">Android pack</button>
+    </div>
+
+    <div>
+      <label class="jj-label">Export format for batch</label>
+      <div class="ic-toggle-row" id="batch-format-toggles">
+        <button class="ic-toggle active" data-bfmt="png">PNG</button>
+        <button class="ic-toggle" data-bfmt="webp">WebP</button>
+        <button class="ic-toggle" data-bfmt="bmp">BMP</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:var(--jj-space-3);flex-wrap:wrap;margin-top:var(--jj-space-2)">
+      <label style="display:flex;align-items:center;gap:var(--jj-space-2);font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);color:var(--jj-fg-muted);cursor:pointer">
+        <input type="checkbox" id="batch-light" checked> Light variant
+      </label>
+      <label style="display:flex;align-items:center;gap:var(--jj-space-2);font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);color:var(--jj-fg-muted);cursor:pointer">
+        <input type="checkbox" id="batch-dark"> Dark variant
+      </label>
+    </div>
+
+    <div class="ic-batch-list" id="batch-list"></div>
+
+    <div style="margin-top:var(--jj-space-4)">
+      <button class="jj-btn jj-btn--primary" id="batch-download-btn">
+        ↓ Download selected as ZIP
+      </button>
+      <div id="batch-status" style="margin-top:var(--jj-space-3);font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);color:var(--jj-fg-subtle);display:none"></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 05 CODE -->
+  <section class="ic-section" id="code">
+    <div class="ic-section-header">
+      <span class="ic-layer-badge">05 · Code Outputs</span>
+      <h2 class="ic-section-title">Implementation references</h2>
+      <p class="ic-lead">Ready-to-paste code snippets for embedding the icon across different contexts. Updates live as you change settings in the generator.</p>
+    </div>
+
+    <div class="ic-grid-2">
+      <div class="ic-card">
+        <div class="ic-card-title">HTML img tag</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-html-img"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-html-img')">Copy</button>
+        </div>
+      </div>
+      <div class="ic-card">
+        <div class="ic-card-title">CSS background (base64)</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-css-bg"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-css-bg')">Copy</button>
+        </div>
+      </div>
+      <div class="ic-card">
+        <div class="ic-card-title">SVG source</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-svg"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-svg')">Copy</button>
+        </div>
+      </div>
+      <div class="ic-card">
+        <div class="ic-card-title">HTML &lt;link&gt; tags (favicon)</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-favicon-links"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-favicon-links')">Copy</button>
+        </div>
+      </div>
+      <div class="ic-card">
+        <div class="ic-card-title">Web App Manifest JSON</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-manifest"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-manifest')">Copy</button>
+        </div>
+      </div>
+      <div class="ic-card">
+        <div class="ic-card-title">Open Graph meta tags</div>
+        <div style="position:relative">
+          <div class="ic-code-output" id="code-og"></div>
+          <button class="jj-btn jj-btn--ghost jj-btn--sm ic-copy-btn" onclick="copyCode('code-og')">Copy</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<script>
+// ============================================================
+// JEFF JENX ICONOGRAPHY TOOL
+// Progressive Enhancement Layer 6 — Non-critical JS
+// The tool is non-functional without JS (it IS a JS tool),
+// but the page structure, navigation, and text are accessible.
+// ============================================================
+
+(function() {
+
+// ---- THEME TOGGLE -------------------------------------------
+var btn = document.getElementById('theme-toggle');
+var html = document.documentElement;
+var stored = localStorage.getItem('jj-theme');
+if (stored) { html.setAttribute('data-theme', stored); btn.textContent = stored === 'dark' ? 'Light' : 'Dark'; }
+btn.addEventListener('click', function() {
+  var c = html.getAttribute('data-theme');
+  var n = c === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', n);
+  btn.textContent = n === 'dark' ? 'Light' : 'Dark';
+  try { localStorage.setItem('jj-theme', n); } catch(e) {}
+  scheduleRender();
+});
+
+// ---- STATE --------------------------------------------------
+var state = {
+  label:    'JJ',
+  variant:  'light',   // light | dark | accent | transparent
+  accent:   'none',
+  customColor: '#7B5EA7',
+  w: 512, h: 512,
+  linked: true,
+  corner: 0,           // radius in % (0–50 or 'ios')
+  padding: 0,          // % padding inside the square
+  fontScaleAuto: true,
+  fontSizePct: 55,
+  tracking: '-0.03em',
+  weight: 500,
+  batchFormat: 'png',
+};
+
+// ---- PLATFORM SIZE DATA ------------------------------------
+var PLATFORMS = [
+  {
+    name: 'Favicon', sizes: [
+      {w:16, h:16, label:'favicon.ico', desc:'Browser tab, bookmarks bar'},
+      {w:32, h:32, label:'favicon-32', desc:'Retina tab / address bar'},
+      {w:48, h:48, label:'favicon-48', desc:'Windows taskbar, pinned site'},
+    ]
+  },
+  {
+    name: 'Apple / iOS', sizes: [
+      {w:57,   h:57,   label:'iPhone-57',    desc:'Home (non-retina, legacy)'},
+      {w:60,   h:60,   label:'iPhone-60',    desc:'Home @1x'},
+      {w:114,  h:114,  label:'iPhone-114',   desc:'Home @2x legacy'},
+      {w:120,  h:120,  label:'iPhone-120',   desc:'Home @2x'},
+      {w:180,  h:180,  label:'iPhone-180',   desc:'Home @3x'},
+      {w:72,   h:72,   label:'iPad-72',      desc:'iPad home @1x legacy'},
+      {w:76,   h:76,   label:'iPad-76',      desc:'iPad home @1x'},
+      {w:152,  h:152,  label:'iPad-152',     desc:'iPad home @2x'},
+      {w:167,  h:167,  label:'iPad-167',     desc:'iPad Pro @2x'},
+      {w:1024, h:1024, label:'AppStore-1024', desc:'App Store artwork'},
+    ]
+  },
+  {
+    name: 'Android / Google Play', sizes: [
+      {w:36,  h:36,  label:'ldpi-36',       desc:'Low density'},
+      {w:48,  h:48,  label:'mdpi-48',       desc:'Medium density (baseline)'},
+      {w:72,  h:72,  label:'hdpi-72',       desc:'High density'},
+      {w:96,  h:96,  label:'xhdpi-96',      desc:'Extra high density'},
+      {w:144, h:144, label:'xxhdpi-144',    desc:'Extra extra high density'},
+      {w:192, h:192, label:'xxxhdpi-192',   desc:'Extra extra extra high density'},
+      {w:512, h:512, label:'PlayStore-512', desc:'Play Store listing'},
+    ]
+  },
+  {
+    name: 'Windows', sizes: [
+      {w:16,  h:16,  label:'win-16',   desc:'Windows 3.1 small icon'},
+      {w:24,  h:24,  label:'win-24',   desc:'Windows 3.1 toolbar'},
+      {w:32,  h:32,  label:'win-32',   desc:'Windows 3.1 / 95 / 98 normal'},
+      {w:48,  h:48,  label:'win-48',   desc:'Windows 95/XP large icon'},
+      {w:64,  h:64,  label:'win-64',   desc:'Windows XP extra large'},
+      {w:128, h:128, label:'win-128',  desc:'Windows Vista+'},
+      {w:256, h:256, label:'win-256',  desc:'Windows 7+ / ICO compressed'},
+      {w:512, h:512, label:'win-512',  desc:'Windows 10 Store tile'},
+    ]
+  },
+  {
+    name: 'macOS', sizes: [
+      {w:16,   h:16,   label:'mac-16',   desc:'ICNS 16pt @1x'},
+      {w:32,   h:32,   label:'mac-32',   desc:'ICNS 16pt @2x / 32pt @1x'},
+      {w:64,   h:64,   label:'mac-64',   desc:'ICNS 32pt @2x'},
+      {w:128,  h:128,  label:'mac-128',  desc:'ICNS 128pt @1x'},
+      {w:256,  h:256,  label:'mac-256',  desc:'ICNS 128pt @2x / 256pt @1x'},
+      {w:512,  h:512,  label:'mac-512',  desc:'ICNS 256pt @2x / 512pt @1x'},
+      {w:1024, h:1024, label:'mac-1024', desc:'ICNS 512pt @2x'},
+    ]
+  },
+  {
+    name: 'Open Graph / Social', sizes: [
+      {w:1200, h:630,  label:'og-banner',   desc:'Facebook / Twitter banner'},
+      {w:1200, h:1200, label:'og-square',   desc:'Open Graph square'},
+      {w:800,  h:800,  label:'twitter-800', desc:'Twitter/X profile image'},
+      {w:400,  h:400,  label:'twitter-400', desc:'Twitter/X profile small'},
+    ]
+  },
+  {
+    name: 'PWA / Web Manifest', sizes: [
+      {w:192,  h:192, label:'pwa-192',  desc:'Manifest icon (required)'},
+      {w:512,  h:512, label:'pwa-512',  desc:'Manifest splash / maskable'},
+    ]
+  },
+  {
+    name: 'Legacy / Retro', sizes: [
+      {w:8,   h:8,   label:'cga-8',   desc:'CGA / EGA tile'},
+      {w:16,  h:16,  label:'nes-16',  desc:'NES tile / CHR cell'},
+      {w:32,  h:32,  label:'dos-32',  desc:'DOS / GEM icon'},
+      {w:128, h:128, label:'mac128k', desc:'Original Mac 128K finder icon'},
+    ]
+  },
+];
+
+// ---- ACCENT COLOR MAP ---------------------------------------
+var ACCENT_COLORS = {
+  none: null,
+  gb:   '#7B5EA7',
+  nes:  '#9B1C1C',
+  xbx:  '#107C10',
+  ps:   '#003791',
+  web:  '#0066CC',
+  shop: '#C0A060',
+};
+
+// ---- CANVAS RENDERING ---------------------------------------
+function getColors() {
+  var dark = isDark();
+  var baseFg = dark ? '#f8f8f8' : '#0a0a0a';
+  var baseBg = dark ? '#1a1a1a' : '#f8f8f8';
+
+  switch (state.variant) {
+    case 'light':
+      return { fill: '#0a0a0a', text: '#f8f8f8', transparent: false };
+    case 'dark':
+      return { fill: '#f8f8f8', text: '#0a0a0a', transparent: false };
+    case 'accent':
+      var ac = state.accent === 'custom'
+        ? state.customColor
+        : (ACCENT_COLORS[state.accent] || (dark ? '#f8f8f8' : '#0a0a0a'));
+      return { fill: ac, text: '#f8f8f8', transparent: false };
+    case 'transparent':
+      return { fill: dark ? '#f8f8f8' : '#0a0a0a', text: dark ? '#0a0a0a' : '#f8f8f8', transparent: true };
+    default:
+      return { fill: baseFg, text: baseBg, transparent: false };
+  }
+}
+
+function isDark() {
+  var t = html.getAttribute('data-theme');
+  if (t === 'dark') return true;
+  if (t === 'light') return false;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function computeFontSize(w, h, label) {
+  if (!state.fontScaleAuto) return Math.min(w, h) * (state.fontSizePct / 100);
+  var side = Math.min(w, h);
+  var len = label.length;
+  // auto: shorter labels get bigger relative size
+  // refined at small sizes
+  if (side <= 16) return side * 0.6;
+  if (side <= 32) return side * 0.55;
+  if (side <= 48) return side * 0.52;
+  var base = side * (len <= 2 ? 0.52 : len <= 3 ? 0.40 : 0.30);
+  return base;
+}
+
+function computeRadius(w, h) {
+  var side = Math.min(w, h);
+  if (state.corner === 'ios') return side * 0.225; // iOS squircle approx
+  return side * (state.corner / 100);
+}
+
+function drawIcon(ctx, w, h, label, dpr) {
+  // dpr: physical-to-logical ratio already applied to canvas.width/height.
+  // All coordinates here are in LOGICAL pixels; we scale the context once.
+  dpr = dpr || 1;
+  var colors = getColors();
+  var pad = Math.round(Math.min(w, h) * (state.padding / 100));
+  var r = computeRadius(w, h);
+
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  if (!colors.transparent) {
+    ctx.fillStyle = colors.fill;
+    if (r > 0) {
+      roundRect(ctx, pad, pad, w - pad*2, h - pad*2, r);
+      ctx.fill();
+    } else {
+      ctx.fillRect(pad, pad, w - pad*2, h - pad*2);
+    }
+  }
+
+  // Draw label — use IBM Plex Mono with explicit weight
+  var fs = computeFontSize(w - pad*2, h - pad*2, label);
+  var fontWeight = state.weight;
+  // Canvas font string: weight must precede size/family
+  ctx.font = fontWeight + ' ' + fs + 'px "IBM Plex Mono", monospace';
+  ctx.fillStyle = colors.text;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  // Letter spacing simulation (canvas has no letter-spacing property)
+  var trackingEm = parseTrackingEm(state.tracking);
+  var trackingPx = fs * trackingEm;
+  if (trackingPx !== 0) {
+    drawSpacedText(ctx, label, w/2, h/2, trackingPx);
+  } else {
+    ctx.fillText(label, w/2, h/2);
+  }
+
+  ctx.restore();
+}
+
+function parseTrackingEm(val) {
+  if (!val || val === '0') return 0;
+  return parseFloat(val); // e.g. -0.03
+}
+
+function drawSpacedText(ctx, text, cx, cy, letterSpacing) {
+  var chars = text.split('');
+  var widths = chars.map(function(c) { return ctx.measureText(c).width; });
+  var totalW = widths.reduce(function(a,b){ return a+b; }, 0) + letterSpacing * (chars.length - 1);
+  var x = cx - totalW / 2;
+  chars.forEach(function(c, i) {
+    ctx.fillText(c, x + widths[i]/2, cy);
+    x += widths[i] + letterSpacing;
+  });
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  r = Math.min(r, Math.min(w, h) / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ---- MAIN CANVAS SETUP ------------------------------------
+var stage = document.getElementById('canvas-stage');
+var canvases = {}; // keyed by bg type
+
+function buildPreviewCanvases() {
+  stage.innerHTML = '';
+  canvases = {};
+  var dpr = window.devicePixelRatio || 1;
+  var bgs = [
+    {key:'light',  label:'On white',  cls:'ic-canvas-bg-white'},
+    {key:'dark',   label:'On black',  cls:'ic-canvas-bg-black'},
+    {key:'smoke',  label:'On smoke',  cls:'ic-canvas-bg-smoke'},
+    {key:'check',  label:'Transparent', cls:'ic-canvas-bg-transparent'},
+  ];
+  bgs.forEach(function(bg) {
+    var wrap = document.createElement('div');
+    wrap.className = 'ic-canvas-container';
+
+    var pad = document.createElement('div');
+    pad.className = bg.cls;
+    pad.style.padding = '16px';
+
+    var c = document.createElement('canvas');
+    // Logical display size (capped for preview)
+    var displayW = Math.min(state.w, 300);
+    var displayH = Math.round(displayW * (state.h / state.w));
+    // Physical backing store = logical × DPR for crisp rendering
+    c.width  = displayW * dpr;
+    c.height = displayH * dpr;
+    c.style.width  = displayW + 'px';
+    c.style.height = displayH + 'px';
+    c.setAttribute('aria-label', 'JJ icon preview on ' + bg.label);
+    // Store logical dimensions and dpr for drawIcon
+    c._logicalW = displayW;
+    c._logicalH = displayH;
+    c._dpr = dpr;
+
+    pad.appendChild(c);
+
+    var lbl = document.createElement('span');
+    lbl.className = 'ic-canvas-label';
+    lbl.textContent = bg.label;
+
+    wrap.appendChild(pad);
+    wrap.appendChild(lbl);
+    stage.appendChild(wrap);
+
+    canvases[bg.key] = c;
+  });
+}
+
+function renderAll() {
+  var label = state.label || 'JJ';
+  Object.keys(canvases).forEach(function(key) {
+    var c = canvases[key];
+    var ctx = c.getContext('2d');
+    var lw = c._logicalW || state.w;
+    var lh = c._logicalH || state.h;
+    var dpr = c._dpr || 1;
+    drawIcon(ctx, lw, lh, label, dpr);
+  });
+  updateStatus();
+  renderThumbs();
+  updateCodeOutputs();
+}
+
+var renderTimer = null;
+function scheduleRender() {
+  if (renderTimer) clearTimeout(renderTimer);
+  renderTimer = setTimeout(renderAll, 30);
+}
+
+// ---- THUMBNAIL STRIP ----------------------------------------
+var THUMB_SIZES = [512,256,128,96,64,48,32,16];
+function renderThumbs() {
+  var strip = document.getElementById('thumb-strip');
+  strip.innerHTML = '';
+  var dpr = window.devicePixelRatio || 1;
+  THUMB_SIZES.forEach(function(s) {
+    var wrap = document.createElement('div');
+    wrap.style.display = 'flex';
+    wrap.style.flexDirection = 'column';
+    wrap.style.alignItems = 'center';
+    wrap.style.gap = '4px';
+
+    var displaySize = Math.min(s, 64); // CSS display size
+
+    var bg = document.createElement('div');
+    bg.className = 'ic-canvas-bg-transparent ic-thumb';
+    bg.style.width = displaySize + 'px';
+    bg.style.height = displaySize + 'px';
+    bg.style.display = 'flex';
+    bg.style.alignItems = 'center';
+    bg.style.justifyContent = 'center';
+
+    var c = document.createElement('canvas');
+    // Physical pixels = display size × DPR for crisp text
+    c.width  = displaySize * dpr;
+    c.height = displaySize * dpr;
+    c.style.width  = displaySize + 'px';
+    c.style.height = displaySize + 'px';
+    c.style.imageRendering = s <= 32 ? 'pixelated' : 'auto';
+
+    var ctx = c.getContext('2d');
+    // Temporarily override state dimensions so computeFontSize uses this thumb's size
+    var savedW = state.w, savedH = state.h;
+    state.w = s; state.h = s;
+    drawIcon(ctx, displaySize, displaySize, state.label || 'JJ', dpr);
+    state.w = savedW; state.h = savedH;
+
+    bg.appendChild(c);
+
+    var lbl = document.createElement('span');
+    lbl.style.fontFamily = 'var(--jj-font-mono)';
+    lbl.style.fontSize = '0.512rem';
+    lbl.style.color = 'var(--jj-fg-subtle)';
+    lbl.style.textAlign = 'center';
+    lbl.textContent = s + 'px';
+
+    bg.addEventListener('click', function() {
+      state.w = s; state.h = s;
+      document.getElementById('ctrl-w').value = s;
+      document.getElementById('ctrl-h').value = s;
+      document.getElementById('ctrl-size-range').value = Math.min(s, 1024);
+      document.getElementById('range-val').textContent = s + 'px';
+      buildPreviewCanvases();
+      scheduleRender();
+    });
+
+    wrap.appendChild(bg);
+    wrap.appendChild(lbl);
+    strip.appendChild(wrap);
+  });
+}
+
+// ---- STATUS -------------------------------------------------
+function updateStatus() {
+  document.getElementById('status-w').textContent = state.w;
+  document.getElementById('status-h').textContent = state.h;
+  document.getElementById('status-variant').textContent = state.variant.charAt(0).toUpperCase() + state.variant.slice(1);
+  document.getElementById('status-label').textContent = state.label || 'JJ';
+  document.getElementById('preview-dim-tag').textContent = state.w + '×' + state.h;
+  document.getElementById('preview-variant-tag').textContent = state.variant.charAt(0).toUpperCase() + state.variant.slice(1);
+}
+
+// ---- PLATFORM SIZE SECTIONS --------------------------------
+function buildSizeMap() {
+  var container = document.getElementById('size-platform-sections');
+  var dpr = window.devicePixelRatio || 1;
+  PLATFORMS.forEach(function(platform) {
+    var sec = document.createElement('div');
+    sec.className = 'ic-platform-section';
+
+    var lbl = document.createElement('span');
+    lbl.className = 'ic-platform-header';
+    lbl.textContent = platform.name;
+
+    var grid = document.createElement('div');
+    grid.className = 'ic-size-grid';
+
+    platform.sizes.forEach(function(sz) {
+      var item = document.createElement('div');
+      item.className = 'ic-size-item';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.title = sz.desc;
+
+      var thumb = document.createElement('div');
+      thumb.className = 'ic-size-thumb';
+
+      var c = document.createElement('canvas');
+      // Display size capped at 48px; physical = display × DPR
+      var d = Math.min(sz.w, 48);
+      var dH = Math.round(d * sz.h / sz.w);
+      c.width  = d * dpr;
+      c.height = dH * dpr;
+      c.style.width  = d + 'px';
+      c.style.height = dH + 'px';
+      c.style.imageRendering = sz.w <= 32 ? 'pixelated' : 'auto';
+
+      // Draw at logical display size (d×dH) with DPR scale
+      var savedW = state.w, savedH = state.h;
+      state.w = sz.w; state.h = sz.h;
+      drawIcon(c.getContext('2d'), d, dH, state.label || 'JJ', dpr);
+      state.w = savedW; state.h = savedH;
+
+      thumb.appendChild(c);
+
+      var name = document.createElement('div');
+      name.className = 'ic-size-name';
+      name.textContent = sz.label;
+
+      var px = document.createElement('div');
+      px.className = 'ic-size-px';
+      px.textContent = sz.w + '×' + sz.h;
+
+      function loadSize() {
+        state.w = sz.w; state.h = sz.h;
+        document.getElementById('ctrl-w').value = sz.w;
+        document.getElementById('ctrl-h').value = sz.h;
+        document.getElementById('ctrl-size-range').value = Math.min(sz.w, 1024);
+        document.getElementById('range-val').textContent = sz.w + 'px';
+        buildPreviewCanvases();
+        scheduleRender();
+        document.getElementById('generator').scrollIntoView({behavior:'smooth'});
+      }
+
+      item.addEventListener('click', loadSize);
+      item.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') loadSize(); });
+
+      item.appendChild(thumb);
+      item.appendChild(name);
+      item.appendChild(px);
+      grid.appendChild(item);
+    });
+
+    sec.appendChild(lbl);
+    sec.appendChild(grid);
+    container.appendChild(sec);
+    if (platform !== PLATFORMS[PLATFORMS.length - 1]) {
+      var hr = document.createElement('hr');
+      hr.className = 'jj-divider';
+      hr.style.margin = '1.5rem 0';
+      container.appendChild(hr);
+    }
+  });
+}
+
+// ---- EXPORT CANVAS ------------------------------------------
+// Returns a fresh canvas at the exact requested pixel dimensions (no DPR).
+// This is what goes into exported files — 512×512 means 512×512 pixels.
+function buildExportCanvas() {
+  var c = document.createElement('canvas');
+  c.width  = state.w;
+  c.height = state.h;
+  // dpr=1: no scaling — canvas coords == pixel coords exactly
+  drawIcon(c.getContext('2d'), state.w, state.h, state.label || 'JJ', 1);
+  return c;
+}
+
+function getMainCanvas() {
+  // For code outputs we still reference the preview canvas for quick data URLs.
+  // For actual exports (download), always use buildExportCanvas().
+  return canvases['light'] || canvases[Object.keys(canvases)[0]];
+}
+
+function canvasToPNG(c) { return c.toDataURL('image/png'); }
+function canvasToWebP(c, q) { return c.toDataURL('image/webp', q || 0.95); }
+function canvasToJPEG(c, q) { return c.toDataURL('image/jpeg', q || 0.92); }
+
+function canvasToBMP(c) {
+  // Manual BMP encoding (24-bit uncompressed)
+  var w = c.width, h = c.height;
+  var ctx = c.getContext('2d');
+  var id = ctx.getImageData(0, 0, w, h);
+  var px = id.data;
+  var rowSize = Math.ceil(w * 3 / 4) * 4;
+  var pixelDataSize = rowSize * h;
+  var fileSize = 54 + pixelDataSize;
+  var buf = new ArrayBuffer(fileSize);
+  var view = new DataView(buf);
+  // BMP header
+  view.setUint16(0, 0x424D, false); // 'BM'
+  view.setUint32(2, fileSize, true);
+  view.setUint32(6, 0, true);
+  view.setUint32(10, 54, true);
+  // DIB header (BITMAPINFOHEADER)
+  view.setUint32(14, 40, true);
+  view.setInt32(18, w, true);
+  view.setInt32(22, -h, true); // top-down
+  view.setUint16(26, 1, true);
+  view.setUint16(28, 24, true);
+  view.setUint32(30, 0, true);
+  view.setUint32(34, pixelDataSize, true);
+  view.setInt32(38, 2835, true);
+  view.setInt32(42, 2835, true);
+  view.setUint32(46, 0, true);
+  view.setUint32(50, 0, true);
+  // Pixel data (BGR, bottom-to-top if negative height; top-down since we set -h)
+  var offset = 54;
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      var i = (y * w + x) * 4;
+      view.setUint8(offset++, px[i+2]); // B
+      view.setUint8(offset++, px[i+1]); // G
+      view.setUint8(offset++, px[i]);   // R
+    }
+    // row padding
+    var padding = rowSize - w * 3;
+    for (var p = 0; p < padding; p++) view.setUint8(offset++, 0);
+  }
+  var blob = new Blob([buf], {type: 'image/bmp'});
+  return URL.createObjectURL(blob);
+}
+
+function canvasToGIF(c) {
+  // Indexed GIF (256 color) — simplified quantization using browser canvas
+  // For a true GIF we'd need a library; we'll use PNG and label as GIF-compat
+  return c.toDataURL('image/png'); // fallback
+}
+
+function buildSVG() {
+  var w = state.w, h = state.h;
+  var label = state.label || 'JJ';
+  var colors = getColors();
+  var r = computeRadius(w, h);
+  var pad = Math.round(Math.min(w, h) * (state.padding / 100));
+  var fs = computeFontSize(w - pad*2, h - pad*2, label);
+  var trackingEm = parseTrackingEm(state.tracking);
+
+  var rectAttrs = 'x="' + pad + '" y="' + pad + '" width="' + (w - pad*2) + '" height="' + (h - pad*2) + '"';
+  if (r > 0) rectAttrs += ' rx="' + r + '"';
+
+  var textAttrs = 'x="' + (w/2) + '" y="' + (h/2) + '"';
+  textAttrs += ' font-family="IBM Plex Mono, Courier New, monospace"';
+  textAttrs += ' font-size="' + fs + '"';
+  textAttrs += ' font-weight="' + state.weight + '"';
+  textAttrs += ' text-anchor="middle" dominant-baseline="central"';
+  textAttrs += ' fill="' + colors.text + '"';
+  if (trackingEm) textAttrs += ' letter-spacing="' + (fs * trackingEm) + '"';
+
+  var bgRect = colors.transparent ? '' : ('<rect ' + rectAttrs + ' fill="' + colors.fill + '"/>');
+
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">\n' +
+    '  ' + bgRect + '\n' +
+    '  <text ' + textAttrs + '>' + label + '</text>\n' +
+    '</svg>';
+}
+
+function downloadFile(dataUrl, filename) {
+  var a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() { document.body.removeChild(a); }, 100);
+}
+
+function downloadBlobUrl(url, filename) {
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+}
+
+function buildExportGrid() {
+  var grid = document.getElementById('export-grid');
+  var formats = [
+    {name:'PNG',          desc:'Lossless, alpha, web standard',       action:'png'},
+    {name:'WebP',         desc:'Modern lossless, smaller than PNG',    action:'webp'},
+    {name:'JPEG',         desc:'Lossy, no alpha, small file size',     action:'jpeg'},
+    {name:'BMP',          desc:'Uncompressed 24-bit, Win3.1 / legacy', action:'bmp'},
+    {name:'GIF',          desc:'8-bit indexed, max 256 colors',        action:'gif'},
+    {name:'SVG',          desc:'Vector, scales to any size, copy or ↓',action:'svg'},
+    {name:'Base64 PNG',   desc:'Embed directly in HTML/CSS',           action:'b64png'},
+    {name:'Base64 WebP',  desc:'Embed directly in HTML/CSS (modern)',  action:'b64webp'},
+    {name:'CSS bg-image', desc:'CSS background-image: url(data:…)',    action:'cssbg'},
+    {name:'HTML <img>',   desc:'Inline img with embedded src=data:…',  action:'htmlimg'},
+    {name:'HTML string',  desc:'Fully self-contained SVG as HTML',     action:'htmlsvg'},
+    {name:'ICO (16+32)',  desc:'Multi-size .ico for favicon (export PNG for ICO tool)', action:'icoinfo'},
+    {name:'ICNS info',    desc:'macOS ICNS — export PNG layers for iconutil', action:'icnsinfo'},
+    {name:'Copy SVG src', desc:'SVG source to clipboard',              action:'clipsvg'},
+    {name:'Copy PNG URL', desc:'data:image/png;base64,… to clipboard', action:'clippng'},
+  ];
+
+  formats.forEach(function(f) {
+    var btn = document.createElement('button');
+    btn.className = 'ic-export-btn';
+
+    var nm = document.createElement('div');
+    nm.className = 'ic-export-btn-name';
+    nm.textContent = f.name;
+
+    var ds = document.createElement('div');
+    ds.className = 'ic-export-btn-desc';
+    ds.textContent = f.desc;
+
+    btn.appendChild(nm);
+    btn.appendChild(ds);
+    btn.addEventListener('click', function() { handleExport(f.action); });
+    grid.appendChild(btn);
+  });
+}
+
+function handleExport(action) {
+  var label = state.label || 'JJ';
+  var base = 'jeffjenx-icon-' + state.variant + '-' + state.w + 'x' + state.h;
+  var card = document.getElementById('code-output-card');
+  var outTitle = document.getElementById('code-output-title');
+  var outContent = document.getElementById('code-output-content');
+
+  // Fresh export canvas at exact requested dimensions (DPR=1)
+  var c = buildExportCanvas();
+
+  switch(action) {
+    case 'png':
+      downloadFile(canvasToPNG(c), base + '.png'); break;
+    case 'webp':
+      downloadFile(canvasToWebP(c), base + '.webp'); break;
+    case 'jpeg':
+      downloadFile(canvasToJPEG(c), base + '.jpg'); break;
+    case 'bmp':
+      downloadBlobUrl(canvasToBMP(c), base + '.bmp'); break;
+    case 'gif':
+      downloadFile(canvasToGIF(c), base + '-256color.png');
+      alert('True GIF export requires a color quantization library. Downloaded as PNG instead — rename to .gif or convert with ImageMagick:\nconvert ' + base + '-256color.png -colors 256 output.gif'); break;
+    case 'svg':
+      var svgBlob = new Blob([buildSVG()], {type:'image/svg+xml'});
+      downloadBlobUrl(URL.createObjectURL(svgBlob), base + '.svg'); break;
+    case 'b64png':
+      var b64 = canvasToPNG(c);
+      card.style.display = '';
+      outTitle.textContent = 'Base64 PNG';
+      outContent.textContent = b64;
+      card.scrollIntoView({behavior:'smooth', block:'nearest'}); break;
+    case 'b64webp':
+      var b64w = canvasToWebP(c);
+      card.style.display = '';
+      outTitle.textContent = 'Base64 WebP';
+      outContent.textContent = b64w;
+      card.scrollIntoView({behavior:'smooth', block:'nearest'}); break;
+    case 'cssbg':
+      var cssbg = '.jj-icon {\n  background-image: url("' + canvasToPNG(c) + '");\n  background-size: contain;\n  background-repeat: no-repeat;\n  width: ' + state.w + 'px;\n  height: ' + state.h + 'px;\n}';
+      card.style.display = '';
+      outTitle.textContent = 'CSS background-image';
+      outContent.textContent = cssbg;
+      card.scrollIntoView({behavior:'smooth', block:'nearest'}); break;
+    case 'htmlimg':
+      var htmli = '<img src="' + canvasToPNG(c) + '" width="' + state.w + '" height="' + state.h + '" alt="[JJ] Jeff Jenx">';
+      card.style.display = '';
+      outTitle.textContent = 'HTML <img> (embedded)';
+      outContent.textContent = htmli;
+      card.scrollIntoView({behavior:'smooth', block:'nearest'}); break;
+    case 'htmlsvg':
+      card.style.display = '';
+      outTitle.textContent = 'Inline SVG';
+      outContent.textContent = buildSVG();
+      card.scrollIntoView({behavior:'smooth', block:'nearest'}); break;
+    case 'icoinfo':
+      card.style.display = '';
+      outTitle.textContent = 'ICO assembly instructions';
+      outContent.textContent =
+        '# To build a multi-size .ico:\n' +
+        '# 1. Export PNG at 16×16, 32×32, 48×48, 256×256\n' +
+        '# 2. Use one of:\n' +
+        '#    magick 16.png 32.png 48.png 256.png favicon.ico  (ImageMagick)\n' +
+        '#    png2ico favicon.ico 16.png 32.png 48.png\n' +
+        '#    IcoFX, Greenfish Icon Editor, RealWorld Icon Editor\n' +
+        '# 3. Place favicon.ico at web root\n' +
+        '<link rel="shortcut icon" href="/favicon.ico">\n' +
+        '<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">\n' +
+        '<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">'; break;
+    case 'icnsinfo':
+      card.style.display = '';
+      outTitle.textContent = 'ICNS assembly (macOS)';
+      outContent.textContent =
+        '# macOS ICNS via iconutil:\n' +
+        '# 1. Create folder: MyIcon.iconset\n' +
+        '# 2. Export these exact filenames:\n' +
+        '#    icon_16x16.png        (16×16)\n' +
+        '#    icon_16x16@2x.png     (32×32)\n' +
+        '#    icon_32x32.png        (32×32)\n' +
+        '#    icon_32x32@2x.png     (64×64)\n' +
+        '#    icon_128x128.png      (128×128)\n' +
+        '#    icon_128x128@2x.png   (256×256)\n' +
+        '#    icon_256x256.png      (256×256)\n' +
+        '#    icon_256x256@2x.png   (512×512)\n' +
+        '#    icon_512x512.png      (512×512)\n' +
+        '#    icon_512x512@2x.png   (1024×1024)\n' +
+        '# 3. Run: iconutil -c icns MyIcon.iconset'; break;
+    case 'clipsvg':
+      navigator.clipboard && navigator.clipboard.writeText(buildSVG()).then(function() {
+        showToast('SVG copied to clipboard');
+      }); break;
+    case 'clippng':
+      navigator.clipboard && navigator.clipboard.writeText(canvasToPNG(c)).then(function() {
+        showToast('PNG data URL copied');
+      }); break;
+  }
+}
+
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--jj-fg);color:var(--jj-bg);font-family:var(--jj-font-mono);font-size:0.8rem;padding:12px 20px;border-radius:4px;z-index:9999;letter-spacing:0.06em;';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function() { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(function() { document.body.removeChild(t); }, 300); }, 2000);
+}
+
+// ---- CODE OUTPUTS -------------------------------------------
+function updateCodeOutputs() {
+  var c = getMainCanvas();
+  if (!c) return;
+  var pngUrl = canvasToPNG(c);
+  var svgSrc = buildSVG();
+  var w = state.w, h = state.h;
+
+  var el = document.getElementById('code-html-img');
+  if (el) el.textContent = '<img\n  src="jeffjenx-icon-' + state.variant + '-' + w + 'x' + h + '.png"\n  width="' + w + '"\n  height="' + h + '"\n  alt="[JJ] Jeff Jenx"\n  loading="lazy"\n>';
+
+  el = document.getElementById('code-css-bg');
+  if (el) {
+    var b64short = pngUrl.substring(0, 80) + '…';
+    el.textContent = '.jj-icon {\n  background-image: url("data:image/png;base64,\n    ' + b64short + '");\n  background-size: contain;\n  width: ' + w + 'px;\n  height: ' + h + 'px;\n}';
+  }
+
+  el = document.getElementById('code-svg');
+  if (el) el.textContent = svgSrc;
+
+  el = document.getElementById('code-favicon-links');
+  if (el) el.textContent =
+    '<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">\n' +
+    '<link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png">\n' +
+    '<link rel="shortcut icon" href="/favicon.ico">\n' +
+    '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n' +
+    '<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152.png">\n' +
+    '<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0a0a0a">';
+
+  el = document.getElementById('code-manifest');
+  if (el) el.textContent = JSON.stringify({
+    name: "Jeff Jenx",
+    short_name: "JJ",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#f8f8f8",
+    theme_color: "#0a0a0a",
+    icons: [
+      {src: "/icon-192.png", sizes: "192x192", type: "image/png"},
+      {src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable"}
+    ]
+  }, null, 2);
+
+  el = document.getElementById('code-og');
+  if (el) el.textContent =
+    '<meta property="og:image" content="https://jeffjenx.com/og-1200x630.png">\n' +
+    '<meta property="og:image:width" content="1200">\n' +
+    '<meta property="og:image:height" content="630">\n' +
+    '<meta property="og:image:alt" content="[JJ] Jeff Jenx">\n' +
+    '<meta name="twitter:card" content="summary_large_image">\n' +
+    '<meta name="twitter:image" content="https://jeffjenx.com/og-1200x630.png">';
+}
+
+// ---- BATCH LIST + DOWNLOAD ----------------------------------
+var BATCH_SIZES = [
+  {w:16,   h:16,   label:'favicon-16',    desc:'Favicon',          tags:['web','favicon']},
+  {w:32,   h:32,   label:'favicon-32',    desc:'Favicon retina',   tags:['web','favicon']},
+  {w:48,   h:48,   label:'icon-48',       desc:'Windows taskbar',  tags:['web','windows']},
+  {w:64,   h:64,   label:'icon-64',       desc:'Windows large',    tags:['windows']},
+  {w:96,   h:96,   label:'icon-96',       desc:'Android xhdpi',    tags:['android']},
+  {w:120,  h:120,  label:'icon-120',      desc:'iOS @2x',          tags:['apple']},
+  {w:128,  h:128,  label:'icon-128',      desc:'Win Vista+',       tags:['windows']},
+  {w:144,  h:144,  label:'icon-144',      desc:'Android xxhdpi',   tags:['android']},
+  {w:152,  h:152,  label:'icon-152',      desc:'iPad @2x',         tags:['apple']},
+  {w:167,  h:167,  label:'icon-167',      desc:'iPad Pro',         tags:['apple']},
+  {w:180,  h:180,  label:'icon-180',      desc:'iOS @3x',          tags:['apple']},
+  {w:192,  h:192,  label:'pwa-192',       desc:'PWA manifest',     tags:['web','android']},
+  {w:256,  h:256,  label:'icon-256',      desc:'Win 7+',           tags:['windows']},
+  {w:512,  h:512,  label:'pwa-512',       desc:'PWA splash',       tags:['web']},
+  {w:1024, h:1024, label:'appstore-1024', desc:'App Store',        tags:['apple']},
+];
+
+var batchChecks = {};
+
+function buildBatchList() {
+  var list = document.getElementById('batch-list');
+  list.innerHTML = '';
+  batchChecks = {};
+  BATCH_SIZES.forEach(function(sz, i) {
+    var row = document.createElement('div');
+    row.className = 'ic-batch-item';
+
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.className = 'ic-batch-check';
+    cb.id = 'batch-' + i; cb.checked = true;
+    batchChecks[i] = cb;
+
+    var szSpan = document.createElement('span');
+    szSpan.className = 'ic-batch-size';
+    szSpan.textContent = sz.w + '×' + sz.h;
+
+    var ds = document.createElement('span');
+    ds.className = 'ic-batch-desc';
+    ds.textContent = sz.desc;
+
+    var tags = document.createElement('span');
+    tags.className = 'ic-batch-platform';
+    sz.tags.forEach(function(t) {
+      var tag = document.createElement('span');
+      tag.className = 'jj-tag jj-tag--outline';
+      tag.style.marginLeft = '4px';
+      tag.textContent = t;
+      tags.appendChild(tag);
+    });
+
+    row.appendChild(cb);
+    row.appendChild(szSpan);
+    row.appendChild(ds);
+    row.appendChild(tags);
+    list.appendChild(row);
+  });
+}
+
+document.getElementById('batch-select-all').addEventListener('click', function() {
+  Object.values(batchChecks).forEach(function(c) { c.checked = true; });
+});
+document.getElementById('batch-select-none').addEventListener('click', function() {
+  Object.values(batchChecks).forEach(function(c) { c.checked = false; });
+});
+function selectByTag(tag) {
+  BATCH_SIZES.forEach(function(sz, i) {
+    batchChecks[i].checked = sz.tags.indexOf(tag) >= 0;
+  });
+}
+document.getElementById('batch-select-web').addEventListener('click', function() { selectByTag('web'); });
+document.getElementById('batch-select-apple').addEventListener('click', function() { selectByTag('apple'); });
+document.getElementById('batch-select-windows').addEventListener('click', function() { selectByTag('windows'); });
+document.getElementById('batch-select-android').addEventListener('click', function() { selectByTag('android'); });
+
+// Batch format toggles
+document.getElementById('batch-format-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-bfmt]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.batchFormat = t.dataset.bfmt;
+});
+
+document.getElementById('batch-download-btn').addEventListener('click', function() {
+  var status = document.getElementById('batch-status');
+  var selected = BATCH_SIZES.filter(function(_, i) { return batchChecks[i] && batchChecks[i].checked; });
+  if (selected.length === 0) { alert('No sizes selected.'); return; }
+
+  var doLight = document.getElementById('batch-light').checked;
+  var doDark  = document.getElementById('batch-dark').checked;
+
+  if (!doLight && !doDark) { alert('Select at least one variant (light or dark).'); return; }
+
+  status.style.display = '';
+  status.textContent = 'Preparing ' + selected.length + ' icons…';
+
+  var files = [];
+
+  // We'll generate each synchronously on a temporary canvas
+  function genOne(sz, variant) {
+    var c = document.createElement('canvas');
+    c.width = sz.w; c.height = sz.h;
+    var savedW = state.w, savedH = state.h, savedVariant = state.variant;
+    state.w = sz.w; state.h = sz.h; state.variant = variant;
+    // dpr=1: export at exact pixel dimensions, no retina scaling
+    drawIcon(c.getContext('2d'), sz.w, sz.h, state.label || 'JJ', 1);
+    state.w = savedW; state.h = savedH; state.variant = savedVariant;
+    return c;
+  }
+
+  var variants = [];
+  if (doLight) variants.push('light');
+  if (doDark)  variants.push('dark');
+
+  var ext = state.batchFormat;
+  var mime = ext === 'webp' ? 'image/webp' : ext === 'bmp' ? 'image/bmp' : 'image/png';
+
+  // Build list of {name, dataUrl}
+  variants.forEach(function(v) {
+    selected.forEach(function(sz) {
+      var c = genOne(sz, v);
+      var fname = 'jeffjenx-icon-' + v + '-' + sz.w + 'x' + sz.h + '.' + ext;
+      var url;
+      if (ext === 'bmp') {
+        // BMP: we'll use PNG and rename for now since blob URL can't be read synchronously
+        url = canvasToPNG(c);
+        fname = fname.replace('.bmp', '.png'); // BMP in batch falls back to PNG
+      } else if (ext === 'webp') {
+        url = c.toDataURL('image/webp', 0.95);
+      } else {
+        url = c.toDataURL('image/png');
+      }
+      files.push({name: fname, url: url});
+    });
+  });
+
+  // Without JSZip, we download files one at a time with a small delay
+  status.textContent = 'Downloading ' + files.length + ' files… (check your downloads folder)';
+
+  if (files.length > 10) {
+    var ok = confirm(files.length + ' files will be downloaded. Your browser may ask for permission.\n\nFor large batches, use a ZIP tool: copy data URLs from the code output instead.\n\nContinue?');
+    if (!ok) { status.style.display = 'none'; return; }
+  }
+
+  files.forEach(function(f, idx) {
+    setTimeout(function() {
+      downloadFile(f.url, f.name);
+      if (idx === files.length - 1) {
+        status.textContent = '✓ Done. ' + files.length + ' files downloaded.';
+      }
+    }, idx * 80);
+  });
+});
+
+// ---- COPY CODE HELPER --------------------------------------
+window.copyCode = function(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard && navigator.clipboard.writeText(el.textContent).then(function() {
+    showToast('Copied to clipboard');
+  });
+};
+document.getElementById('copy-code-btn').addEventListener('click', function() {
+  var el = document.getElementById('code-output-content');
+  if (!el) return;
+  navigator.clipboard && navigator.clipboard.writeText(el.textContent).then(function() {
+    showToast('Copied to clipboard');
+  });
+});
+
+// ---- CONTROL WIRING ----------------------------------------
+
+// Label
+document.getElementById('ctrl-label').addEventListener('input', function() {
+  state.label = this.value || 'JJ';
+  scheduleRender();
+});
+
+// Variant toggles
+document.getElementById('variant-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-variant]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.variant = t.dataset.variant;
+  var ap = document.getElementById('accent-picker-wrap');
+  ap.style.display = state.variant === 'accent' ? '' : 'none';
+  scheduleRender();
+});
+
+// Accent picker
+document.getElementById('ctrl-accent').addEventListener('change', function() {
+  state.accent = this.value;
+  document.getElementById('custom-color-wrap').style.display = this.value === 'custom' ? '' : 'none';
+  scheduleRender();
+});
+document.getElementById('ctrl-custom-color').addEventListener('input', function() {
+  state.customColor = this.value;
+  scheduleRender();
+});
+
+// Dimensions
+document.getElementById('ctrl-w').addEventListener('input', function() {
+  var v = parseInt(this.value, 10);
+  if (isNaN(v) || v < 8) return;
+  state.w = v;
+  if (state.linked) { state.h = v; document.getElementById('ctrl-h').value = v; }
+  document.getElementById('ctrl-size-range').value = Math.min(v, 1024);
+  document.getElementById('range-val').textContent = v + 'px';
+  buildPreviewCanvases();
+  scheduleRender();
+});
+document.getElementById('ctrl-h').addEventListener('input', function() {
+  var v = parseInt(this.value, 10);
+  if (isNaN(v) || v < 8) return;
+  state.h = v;
+  if (state.linked) { state.w = v; document.getElementById('ctrl-w').value = v; }
+  buildPreviewCanvases();
+  scheduleRender();
+});
+document.getElementById('link-toggle').addEventListener('click', function() {
+  state.linked = !state.linked;
+  this.classList.toggle('linked', state.linked);
+  this.title = state.linked ? 'Unlink width/height' : 'Link width/height';
+  this.textContent = state.linked ? '⛓' : '⛓';
+});
+
+// Size range
+document.getElementById('ctrl-size-range').addEventListener('input', function() {
+  var v = parseInt(this.value, 10);
+  document.getElementById('range-val').textContent = v + 'px';
+  state.w = v; state.h = v;
+  document.getElementById('ctrl-w').value = v;
+  document.getElementById('ctrl-h').value = v;
+  buildPreviewCanvases();
+  scheduleRender();
+});
+
+// Preset
+document.getElementById('ctrl-preset').addEventListener('change', function() {
+  if (!this.value) return;
+  var parts = this.value.split(',');
+  state.w = parseInt(parts[0], 10);
+  state.h = parseInt(parts[1], 10);
+  document.getElementById('ctrl-w').value = state.w;
+  document.getElementById('ctrl-h').value = state.h;
+  document.getElementById('ctrl-size-range').value = Math.min(state.w, 1024);
+  document.getElementById('range-val').textContent = state.w + 'px';
+  this.value = '';
+  buildPreviewCanvases();
+  scheduleRender();
+});
+
+// Font scale
+document.getElementById('font-scale-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-scale]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.fontScaleAuto = t.dataset.scale === 'auto';
+  document.getElementById('manual-font-wrap').style.display = state.fontScaleAuto ? 'none' : '';
+  scheduleRender();
+});
+document.getElementById('ctrl-fontsize').addEventListener('input', function() {
+  state.fontSizePct = parseInt(this.value, 10);
+  document.getElementById('fontsize-val').textContent = state.fontSizePct + '%';
+  scheduleRender();
+});
+
+// Tracking
+document.getElementById('tracking-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-tracking]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.tracking = t.dataset.tracking;
+  scheduleRender();
+});
+
+// Weight
+document.getElementById('weight-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-weight]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.weight = parseInt(t.dataset.weight, 10);
+  scheduleRender();
+});
+
+// Corners
+document.getElementById('corner-toggles').addEventListener('click', function(e) {
+  var t = e.target.closest('[data-corner]');
+  if (!t) return;
+  this.querySelectorAll('.ic-toggle').forEach(function(b) { b.classList.remove('active'); });
+  t.classList.add('active');
+  state.corner = t.dataset.corner === 'ios' ? 'ios' : parseInt(t.dataset.corner, 10);
+  scheduleRender();
+});
+
+// Padding
+document.getElementById('ctrl-padding').addEventListener('input', function() {
+  state.padding = parseInt(this.value, 10);
+  document.getElementById('padding-val').textContent = state.padding + '%';
+  scheduleRender();
+});
+
+// ---- INIT ---------------------------------------------------
+// CRITICAL: Wait for IBM Plex Mono to be fully loaded before drawing
+// anything to canvas. Canvas ignores CSS font loading — if we draw
+// before the font file arrives, it silently falls back to Courier New.
+// We load both weights we use (400 and 500) explicitly.
+var fontPromises = [
+  document.fonts.load('400 64px "IBM Plex Mono"', 'JJ'),
+  document.fonts.load('500 64px "IBM Plex Mono"', 'JJ'),
+];
+Promise.all(fontPromises).then(function() {
+  buildPreviewCanvases();
+  buildSizeMap();
+  buildExportGrid();
+  buildBatchList();
+  renderAll();
+}).catch(function() {
+  // Font load failed (offline, blocked) — render anyway with fallback
+  buildPreviewCanvases();
+  buildSizeMap();
+  buildExportGrid();
+  buildBatchList();
+  renderAll();
+});
+
+})(); // end IIFE
+</script>
+
+</body>
+</html>

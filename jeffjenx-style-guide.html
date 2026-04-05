@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Jenx · Style Guide</title>
+<meta name="description" content="Jeff Jenx component reference and design system documentation.">
+
+<!--
+  PROGRESSIVE ENHANCEMENT LAYER MAP
+  ==================================
+  Layer 0 — This file renders in any browser, any era. Pure HTML.
+  Layer 1 — @layer base    : reset, tokens, readable defaults
+  Layer 2 — @layer type    : typographic scale, spacing rhythm
+  Layer 3 — @layer layout  : grid, flex, structure
+  Layer 4 — @layer enhanced: custom properties, modern selectors
+  Layer 5 — @layer motion  : animation (prefers-reduced-motion gated)
+  Layer 6 — <script>       : theme toggle, copy buttons (non-critical)
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="jeffjenx-tokens.css">
+
+<style>
+/* =============================================================================
+   LAYER 0 — BASE RESET
+   Works in every browser. Zero assumptions about layout.
+   ============================================================================= */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    background: var(--jj-bg, #f8f8f8);
+    color: var(--jj-fg, #0a0a0a);
+    cursor: default;
+    font-family: var(--jj-font-sans, sans-serif);
+    scroll-padding-top: 4rem; /* 64px - safe ceiling for the nav bar */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body { min-height: 100vh; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  a {
+    color: var(--jj-accent, var(--jj-fg, #0a0a0a));
+    text-underline-offset: 3px;
+  }
+  a:hover { opacity: 0.75; }
+
+  code, pre, kbd, samp {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: 0.9em;
+  }
+
+  pre {
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--jj-border-color, #c8c8c8);
+    margin: 2rem 0;
+  }
+
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.75rem; }
+  th { font-weight: 500; border-bottom: 1px solid var(--jj-border-color, #c8c8c8); }
+  td { border-bottom: 1px solid var(--jj-bg-sunken, #e8e8e8); }
+}
+
+/* =============================================================================
+   LAYER 1 — TYPOGRAPHY
+   Readable type at every scale. No layout, no color beyond defaults.
+   ============================================================================= */
+@layer type {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--jj-font-mono, monospace);
+    font-weight: var(--jj-weight-medium, 500);
+    line-height: var(--jj-leading-tight, 1.2);
+    letter-spacing: var(--jj-tracking-tight, -0.03em);
+    color: var(--jj-fg, #0a0a0a);
+  }
+
+  h1 { font-size: var(--jj-text-2xl, 2.441rem); }
+  h2 { font-size: var(--jj-text-xl,  1.953rem); }
+  h3 { font-size: var(--jj-text-lg,  1.563rem); }
+  h4 { font-size: var(--jj-text-md,  1.25rem);  }
+  h5 { font-size: var(--jj-text-base, 1rem); letter-spacing: 0; }
+  h6 { font-size: var(--jj-text-sm,  0.8rem);
+       letter-spacing: var(--jj-tracking-wider, 0.12em);
+       text-transform: uppercase; }
+
+  p {
+    font-size: var(--jj-text-base, 1rem);
+    line-height: var(--jj-leading-normal, 1.6);
+    color: var(--jj-fg, #0a0a0a);
+    max-width: 68ch;
+  }
+
+  p + p { margin-top: 1em; }
+
+  small {
+    font-size: var(--jj-text-sm, 0.8rem);
+    color: var(--jj-fg-muted, #555);
+  }
+
+  strong { font-weight: var(--jj-weight-medium, 500); }
+
+  blockquote {
+    border-left: 3px solid var(--jj-accent, #0a0a0a);
+    padding-left: 1rem;
+    font-style: normal;
+    color: var(--jj-fg-muted, #555);
+  }
+
+  [data-theme="light"] ::selection {
+    color: var(--jj-accent-dark);
+    background: var(--jj-accent-light);
+  }
+
+  [data-theme="dark"] ::selection {
+    color: var(--jj-accent-light);
+    background: var(--jj-accent-dark);
+  }
+}
+
+/* =============================================================================
+   LAYER 2 — LAYOUT
+   Structure, spacing, grid. Requires layer 0 + 1 to be meaningful.
+   ============================================================================= */
+@layer layout {
+  .sg-wrap {
+    max-width: var(--jj-width-full, 1280px);
+    margin: 0 auto;
+    padding: 0 var(--jj-space-6, 1.5rem);
+  }
+
+  .sg-nav {
+    position: sticky;
+    top: 0;
+    z-index: var(--jj-z-raised, 10);
+    background: var(--jj-bg, #f8f8f8);
+    border-bottom: 1px solid var(--jj-border-color, #c8c8c8);
+    padding: var(--jj-space-3, 0.75rem) var(--jj-space-6, 1.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--jj-space-4, 1rem);
+    flex-wrap: wrap;
+  }
+
+  .sg-nav-links {
+    display: flex;
+    gap: var(--jj-space-4, 1rem);
+    flex-wrap: wrap;
+    list-style: none;
+  }
+
+  .sg-main {
+    padding: var(--jj-space-12, 3rem) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-16, 4rem);
+  }
+
+  .sg-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-8, 2rem);
+  }
+
+  .sg-section-header {
+    border-bottom: 1px solid var(--jj-border-color, #c8c8c8);
+    padding-bottom: var(--jj-space-4, 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-2, 0.5rem);
+  }
+
+  .sg-layer-badge {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    letter-spacing: var(--jj-tracking-widest, 0.18em);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle, #888);
+  }
+
+  .sg-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jj-space-4, 1rem);
+    align-items: flex-start;
+  }
+
+  .sg-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-3, 0.75rem);
+  }
+
+  .sg-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--jj-space-4, 1rem);
+  }
+
+  .sg-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--jj-space-4, 1rem);
+  }
+
+  .sg-surface {
+    padding: var(--jj-space-6, 1.5rem);
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jj-space-4, 1rem);
+    align-items: flex-start;
+  }
+
+  .sg-surface--dark {
+    background: var(--jj-black, #0a0a0a);
+    color: var(--jj-white, #f8f8f8);
+    border-color: #2a2a2a;
+  }
+
+  .sg-surface--light {
+    background: var(--jj-white, #f8f8f8);
+    color: var(--jj-black, #0a0a0a);
+    border-color: #c8c8c8;
+  }
+
+  .sg-label {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle, #888);
+    margin-bottom: var(--jj-space-2, 0.5rem);
+    display: block;
+  }
+}
+
+/* =============================================================================
+   LAYER 3 — COMPONENTS (ENHANCED)
+   Full component styles. Requires layers 0–2.
+   ============================================================================= */
+@layer enhanced {
+
+  /* --- MARK ---------------------------------------------------------------- */
+  .jj-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--jj-width-mark, 64px);
+    height: var(--jj-width-mark, 64px);
+    background: var(--jj-fg, #0a0a0a);
+    color: var(--jj-bg, #f8f8f8);
+    font-family: var(--jj-font-mono, monospace);
+    font-weight: var(--jj-weight-medium, 500);
+    font-size: var(--jj-text-2xl, 2.441rem);
+    letter-spacing: var(--jj-tracking-tight, -0.03em);
+    border-radius: var(--jj-radius-0, 0);
+    flex-shrink: 0;
+    line-height: 1;
+    user-select: none;
+  }
+  .jj-mark--sm  { width: var(--jj-width-mark-sm, 32px); height: var(--jj-width-mark-sm, 32px); font-size: var(--jj-text-md, 1.25rem); }
+  .jj-mark--lg  { width: var(--jj-width-mark-lg, 96px); height: var(--jj-width-mark-lg, 96px); font-size: var(--jj-text-3xl, 3.052rem); }
+  .jj-mark--accent { background: var(--jj-accent, #0a0a0a); color: var(--jj-white, #f8f8f8); }
+
+  .jj-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--jj-space-4, 1rem);
+    text-decoration: none;
+    color: inherit;
+  }
+  .jj-lockup-text { display: flex; flex-direction: column; gap: 2px; }
+  .jj-lockup-name {
+    font-family: var(--jj-font-mono, monospace);
+    font-weight: var(--jj-weight-medium, 500);
+    font-size: var(--jj-text-md, 1.25rem);
+    letter-spacing: var(--jj-tracking-tight, -0.03em);
+    line-height: 1;
+    color: var(--jj-fg, #0a0a0a);
+  }
+  .jj-lockup-sub {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    letter-spacing: var(--jj-tracking-widest, 0.18em);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle, #888);
+  }
+  .sg-surface--dark .jj-lockup-name { color: var(--jj-white, #f8f8f8); }
+  .sg-surface--dark .jj-lockup-sub  { color: #555; }
+
+  /* --- BUTTONS ------------------------------------------------------------ */
+  .jj-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--jj-space-2, 0.5rem);
+    padding: var(--jj-space-3, 0.75rem) var(--jj-space-5, 1.25rem);
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-sm, 0.8rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-wide, 0.06em);
+    line-height: 1;
+    border-radius: var(--jj-radius-md, 4px);
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background var(--jj-duration-fast, 80ms) var(--jj-ease, ease),
+                color var(--jj-duration-fast, 80ms) var(--jj-ease, ease),
+                border-color var(--jj-duration-fast, 80ms) var(--jj-ease, ease);
+  }
+  .jj-btn:focus-visible {
+    outline: 2px solid var(--jj-accent, #0a0a0a);
+    outline-offset: 2px;
+  }
+
+  /* Primary */
+  .jj-btn--primary {
+    background: var(--jj-fg, #0a0a0a);
+    color: var(--jj-bg, #f8f8f8);
+    border-color: var(--jj-fg, #0a0a0a);
+  }
+  .jj-btn--primary:hover {
+    background: var(--jj-charcoal, #2a2a2a);
+    border-color: var(--jj-charcoal, #2a2a2a);
+  }
+
+  /* Secondary */
+  .jj-btn--secondary {
+    background: transparent;
+    color: var(--jj-fg, #0a0a0a);
+    border-color: var(--jj-border-color, #c8c8c8);
+  }
+  .jj-btn--secondary:hover {
+    background: var(--jj-bg-sunken, #e8e8e8);
+  }
+
+  /* Accent */
+  .jj-btn--accent {
+    background: var(--jj-accent, #0a0a0a);
+    color: var(--jj-white, #f8f8f8);
+    border-color: var(--jj-accent, #0a0a0a);
+  }
+  .jj-btn--accent:hover {
+    background: var(--jj-accent-dark, #333);
+    border-color: var(--jj-accent-dark, #333);
+  }
+
+  /* Ghost */
+  .jj-btn--ghost {
+    background: transparent;
+    color: var(--jj-fg-muted, #555);
+    border-color: transparent;
+  }
+  .jj-btn--ghost:hover {
+    color: var(--jj-fg, #0a0a0a);
+    background: var(--jj-bg-sunken, #e8e8e8);
+  }
+
+  /* Sizes */
+  .jj-btn--sm { padding: var(--jj-space-2, 0.5rem) var(--jj-space-3, 0.75rem); font-size: var(--jj-text-xs, 0.64rem); }
+  .jj-btn--lg { padding: var(--jj-space-4, 1rem) var(--jj-space-8, 2rem); font-size: var(--jj-text-base, 1rem); }
+
+  /* Disabled */
+  .jj-btn:disabled,
+  .jj-btn[aria-disabled="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* --- TAGS / BADGES ------------------------------------------------------ */
+  .jj-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--jj-space-1, 0.25rem);
+    padding: var(--jj-space-1, 0.25rem) var(--jj-space-2, 0.5rem);
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    border-radius: var(--jj-radius-sm, 2px);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .jj-tag--default  { background: var(--jj-bg-sunken, #e8e8e8); color: var(--jj-fg-muted, #555); }
+  .jj-tag--accent   { background: var(--jj-accent-light, #e8e8e8); color: var(--jj-accent, #0a0a0a); }
+  .jj-tag--solid    { background: var(--jj-accent, #0a0a0a); color: var(--jj-white, #f8f8f8); }
+  .jj-tag--outline  { background: transparent; color: var(--jj-fg-muted, #555); border: 1px solid var(--jj-border-color, #c8c8c8); }
+
+  /* Category label (inline, no background) */
+  .jj-category-label {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    color: var(--jj-accent, #0a0a0a);
+  }
+
+  /* --- INPUTS ------------------------------------------------------------- */
+  .jj-input,
+  .jj-select,
+  .jj-textarea {
+    display: block;
+    width: 100%;
+    padding: var(--jj-space-3, 0.75rem) var(--jj-space-4, 1rem);
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-sm, 0.8rem);
+    color: var(--jj-fg, #0a0a0a);
+    background: var(--jj-bg-raised, #fff);
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    border-radius: var(--jj-radius-md, 4px);
+    line-height: var(--jj-leading-snug, 1.4);
+    transition: border-color var(--jj-duration-fast, 80ms);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .jj-input:focus,
+  .jj-select:focus,
+  .jj-textarea:focus {
+    outline: none;
+    border-color: var(--jj-accent, #0a0a0a);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--jj-accent, #0a0a0a) 15%, transparent);
+  }
+  .jj-input::placeholder,
+  .jj-textarea::placeholder { color: var(--jj-fg-subtle, #888); }
+  .jj-input:disabled,
+  .jj-select:disabled,
+  .jj-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--jj-bg-sunken, #e8e8e8);
+  }
+
+  .jj-label {
+    display: block;
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    color: var(--jj-fg-muted, #555);
+    margin-bottom: var(--jj-space-2, 0.5rem);
+  }
+
+  .jj-field { display: flex; flex-direction: column; gap: var(--jj-space-2, 0.5rem); }
+  .jj-field-hint {
+    font-family: var(--jj-font-sans, sans-serif);
+    font-size: var(--jj-text-xs, 0.64rem);
+    color: var(--jj-fg-subtle, #888);
+  }
+  .jj-field-error .jj-input,
+  .jj-field-error .jj-select { border-color: #9B1C1C; }
+  .jj-field-error .jj-field-hint { color: #9B1C1C; }
+
+  /* --- CARDS -------------------------------------------------------------- */
+  .jj-card {
+    background: var(--jj-bg-raised, #fff);
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    border-radius: var(--jj-radius-lg, 6px);
+    padding: var(--jj-space-6, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-4, 1rem);
+  }
+  .jj-card--accent { border-left: 3px solid var(--jj-accent, #0a0a0a); }
+  .jj-card-title {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-md, 1.25rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-tight, -0.03em);
+    color: var(--jj-fg, #0a0a0a);
+    line-height: var(--jj-leading-tight, 1.2);
+  }
+  .jj-card-meta {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle, #888);
+  }
+  .jj-card-body {
+    font-family: var(--jj-font-sans, sans-serif);
+    font-size: var(--jj-text-sm, 0.8rem);
+    line-height: var(--jj-leading-normal, 1.6);
+    color: var(--jj-fg-muted, #555);
+  }
+  .jj-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--jj-space-3, 0.75rem);
+    flex-wrap: wrap;
+    padding-top: var(--jj-space-4, 1rem);
+    border-top: 1px solid var(--jj-border-color, #c8c8c8);
+    margin-top: auto;
+  }
+  .jj-card-price {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-lg, 1.563rem);
+    font-weight: var(--jj-weight-medium, 500);
+    font-variant-numeric: tabular-nums;
+    color: var(--jj-fg, #0a0a0a);
+    letter-spacing: var(--jj-tracking-tight, -0.03em);
+  }
+
+  /* --- PRODUCT CARD ------------------------------------------------------- */
+  .jj-product-card {
+    background: var(--jj-bg-raised, #fff);
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    border-radius: var(--jj-radius-lg, 6px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--jj-duration-normal, 160ms);
+  }
+  .jj-product-card:hover { border-color: var(--jj-accent, #0a0a0a); }
+  .jj-product-card-img {
+    aspect-ratio: 4/3;
+    background: var(--jj-bg-sunken, #e8e8e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    color: var(--jj-fg-subtle, #888);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    border-bottom: 1px solid var(--jj-border-color, #c8c8c8);
+    position: relative;
+  }
+  .jj-product-card-accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--jj-accent, #0a0a0a);
+  }
+  .jj-product-card-body {
+    padding: var(--jj-space-4, 1rem) var(--jj-space-5, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-2, 0.5rem);
+    flex: 1;
+  }
+  .jj-product-card-footer {
+    padding: var(--jj-space-3, 0.75rem) var(--jj-space-5, 1.25rem);
+    border-top: 1px solid var(--jj-border-color, #c8c8c8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--jj-space-3, 0.75rem);
+  }
+
+  /* --- NAVIGATION --------------------------------------------------------- */
+  .jj-nav-link {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-sm, 0.8rem);
+    font-weight: var(--jj-weight-medium, 500);
+    letter-spacing: var(--jj-tracking-wide, 0.06em);
+    color: var(--jj-fg-muted, #555);
+    text-decoration: none;
+    padding: var(--jj-space-1, 0.25rem) 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--jj-duration-fast, 80ms),
+                border-color var(--jj-duration-fast, 80ms);
+  }
+  .jj-nav-link:hover,
+  .jj-nav-link[aria-current="page"] {
+    color: var(--jj-fg, #0a0a0a);
+    border-bottom-color: var(--jj-accent, #0a0a0a);
+    opacity: 1;
+  }
+
+  /* --- CODE BLOCK --------------------------------------------------------- */
+  .jj-code {
+    background: var(--jj-bg-sunken, #e8e8e8);
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    border-radius: var(--jj-radius-sm, 2px);
+    padding: var(--jj-space-4, 1rem) var(--jj-space-5, 1.25rem);
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-sm, 0.8rem);
+    line-height: var(--jj-leading-loose, 1.8);
+    color: var(--jj-fg, #0a0a0a);
+    overflow-x: auto;
+    position: relative;
+    white-space: pre;
+  }
+  .jj-code .comment { color: var(--jj-fg-subtle, #888); }
+  .jj-code .key     { color: var(--jj-accent, #0a0a0a); font-weight: 500; }
+  .jj-code .value   { color: var(--jj-fg-muted, #555); }
+
+  /* Inline code */
+  .jj-inline-code {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: 0.875em;
+    background: var(--jj-bg-sunken, #e8e8e8);
+    padding: 1px 5px;
+    border-radius: var(--jj-radius-sm, 2px);
+    color: var(--jj-fg, #0a0a0a);
+  }
+
+  /* --- SWATCH ------------------------------------------------------------- */
+  .jj-swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--jj-space-3, 0.75rem);
+  }
+  .jj-swatch {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-2, 0.5rem);
+  }
+  .jj-swatch-block {
+    height: 48px;
+    border-radius: var(--jj-radius-sm, 2px);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .jj-swatch-name {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    font-weight: var(--jj-weight-medium, 500);
+    color: var(--jj-fg, #0a0a0a);
+  }
+  .jj-swatch-hex {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    color: var(--jj-fg-subtle, #888);
+  }
+
+  /* --- TYPE SCALE DEMO ---------------------------------------------------- */
+  .jj-type-specimen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-3, 0.75rem);
+  }
+  .jj-type-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--jj-space-6, 1.5rem);
+    padding: var(--jj-space-3, 0.75rem) 0;
+    border-bottom: 1px solid var(--jj-bg-sunken, #e8e8e8);
+  }
+  .jj-type-meta {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    color: var(--jj-fg-subtle, #888);
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+
+  /* --- DIVIDER ------------------------------------------------------------ */
+  .jj-divider {
+    border: none;
+    border-top: 1px solid var(--jj-border-color, #c8c8c8);
+  }
+
+  /* --- THEME TOGGLE ------------------------------------------------------- */
+  #theme-toggle {
+    font-family: var(--jj-font-mono, monospace);
+    font-size: var(--jj-text-xs, 0.64rem);
+    letter-spacing: var(--jj-tracking-wider, 0.12em);
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--jj-border-color, #c8c8c8);
+    color: var(--jj-fg-muted, #555);
+    padding: var(--jj-space-2, 0.5rem) var(--jj-space-3, 0.75rem);
+    border-radius: var(--jj-radius-md, 4px);
+    cursor: pointer;
+  }
+  #theme-toggle:hover { background: var(--jj-bg-sunken, #e8e8e8); }
+}
+
+/* =============================================================================
+   LAYER 4 — MOTION
+   Only runs if user has not requested reduced motion.
+   ============================================================================= */
+@layer motion {
+  @media (prefers-reduced-motion: no-preference) {
+    .jj-product-card { transition: border-color var(--jj-duration-normal, 160ms) var(--jj-ease, ease),
+                                   transform var(--jj-duration-normal, 160ms) var(--jj-ease, ease); }
+    .jj-product-card:hover { transform: translateY(-2px); }
+
+    .jj-btn { transition: background var(--jj-duration-fast, 80ms) var(--jj-ease, ease),
+                           color var(--jj-duration-fast, 80ms) var(--jj-ease, ease),
+                           border-color var(--jj-duration-fast, 80ms) var(--jj-ease, ease),
+                           transform var(--jj-duration-fast, 80ms) var(--jj-ease, ease); }
+    .jj-btn:active { transform: scale(0.98); }
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================================
+     NAVIGATION
+     Layer 0: semantic nav landmark, links work with no CSS
+     Layer 2+: sticky bar with lockup and theme toggle
+     ===================================================================== -->
+<nav class="sg-nav" aria-label="Style guide navigation">
+  <a href="#" class="jj-lockup" aria-label="Jeff Jenx home">
+    <span class="jj-mark jj-mark--sm" aria-hidden="true">JJ</span>
+    <span class="jj-lockup-text">
+      <span class="jj-lockup-name">Jeff Jenx</span>
+      <span class="jj-lockup-sub">Style Guide v1.0</span>
+    </span>
+  </a>
+  <ul class="sg-nav-links" role="list">
+    <li><a href="#mark"       class="jj-nav-link">Mark</a></li>
+    <li><a href="#color"      class="jj-nav-link">Color</a></li>
+    <li><a href="#type"       class="jj-nav-link">Type</a></li>
+    <li><a href="#buttons"    class="jj-nav-link">Buttons</a></li>
+    <li><a href="#inputs"     class="jj-nav-link">Inputs</a></li>
+    <li><a href="#cards"      class="jj-nav-link">Cards</a></li>
+    <li><a href="#categories" class="jj-nav-link">Categories</a></li>
+    <li><a href="#layers"     class="jj-nav-link">PE Layers</a></li>
+  </ul>
+</nav>
+
+<main class="sg-wrap">
+<div class="sg-main">
+
+  <!-- MARK ================================================================ -->
+  <section class="sg-section" id="mark">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Brand · Mark System</span>
+      <h2>Logomark &amp; lockup</h2>
+      <p>Filled square. No stroke. Fill = foreground (or accent). JJ = background. Always. The <code class="jj-inline-code">[JJ]</code> text string is the universal plain-text fallback.</p>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-col">
+        <span class="sg-label">Sizes · light</span>
+        <div class="sg-surface sg-surface--light sg-row" style="align-items:flex-end;gap:1rem">
+          <span class="jj-mark jj-mark--sm"  style="background:var(--jj-black);color:var(--jj-white)" aria-label="Jeff Jenx mark small">JJ</span>
+          <span class="jj-mark"              style="background:var(--jj-black);color:var(--jj-white)" aria-label="Jeff Jenx mark">JJ</span>
+          <span class="jj-mark jj-mark--lg"  style="background:var(--jj-black);color:var(--jj-white)" aria-label="Jeff Jenx mark large">JJ</span>
+        </div>
+      </div>
+      <div class="sg-col">
+        <span class="sg-label">Sizes · dark</span>
+        <div class="sg-surface sg-surface--dark sg-row" style="align-items:flex-end;gap:1rem">
+          <span class="jj-mark jj-mark--sm"  style="background:var(--jj-white);color:var(--jj-black)" aria-label="Jeff Jenx mark small dark">JJ</span>
+          <span class="jj-mark"              style="background:var(--jj-white);color:var(--jj-black)" aria-label="Jeff Jenx mark dark">JJ</span>
+          <span class="jj-mark jj-mark--lg"  style="background:var(--jj-white);color:var(--jj-black)" aria-label="Jeff Jenx mark large dark">JJ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-col" style="flex:1;min-width:260px">
+        <span class="sg-label">Full lockup · light</span>
+        <div class="sg-surface sg-surface--light">
+          <a href="#" class="jj-lockup">
+            <span class="jj-mark" style="background:var(--jj-black);color:var(--jj-white)" aria-hidden="true">JJ</span>
+            <span class="jj-lockup-text">
+              <span class="jj-lockup-name" style="color:var(--jj-black)">Jeff Jenx</span>
+              <span class="jj-lockup-sub">Since 1983</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="sg-col" style="flex:1;min-width:260px">
+        <span class="sg-label">Full lockup · dark</span>
+        <div class="sg-surface sg-surface--dark">
+          <a href="#" class="jj-lockup">
+            <span class="jj-mark" style="background:var(--jj-white);color:var(--jj-black)" aria-hidden="true">JJ</span>
+            <span class="jj-lockup-text">
+              <span class="jj-lockup-name" style="color:var(--jj-white)">Jeff Jenx</span>
+              <span class="jj-lockup-sub">Since 1983</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sg-col">
+      <span class="sg-label">Plain text fallback — works in every context</span>
+      <div class="jj-code" role="figure" aria-label="Text fallback examples">
+<span class="comment"># Markdown / README</span>
+<span class="key">[JJ] Jeff Jenx</span>
+
+<span class="comment"># With category</span>
+<span class="key">[JJ] Jeff Jenx · GB Home</span>
+
+<span class="comment"># Terminal / git log</span>
+<span class="key">[JJ] jeffjenx.com — accuracy · simplicity · performance</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- COLOR =============================================================== -->
+  <section class="sg-section" id="color">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Design Tokens · Color</span>
+      <h2>Color system</h2>
+      <p>Monochrome base. Category accents applied via <code class="jj-inline-code">data-category</code> attribute on any ancestor element.</p>
+    </div>
+
+    <div>
+      <span class="sg-label">Base palette</span>
+      <div class="jj-swatch-grid">
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#0a0a0a"></div><div class="jj-swatch-name">JJ Black</div><div class="jj-swatch-hex">#0a0a0a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#1a1a1a"></div><div class="jj-swatch-name">Ink</div><div class="jj-swatch-hex">#1a1a1a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#2a2a2a"></div><div class="jj-swatch-name">Charcoal</div><div class="jj-swatch-hex">#2a2a2a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#3a3a3a"></div><div class="jj-swatch-name">Border</div><div class="jj-swatch-hex">#3a3a3a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#888"></div><div class="jj-swatch-name">Muted</div><div class="jj-swatch-hex">#888888</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#c8c8c8"></div><div class="jj-swatch-name">Silver</div><div class="jj-swatch-hex">#c8c8c8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#e8e8e8"></div><div class="jj-swatch-name">Smoke</div><div class="jj-swatch-hex">#e8e8e8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#f8f8f8;border:1px solid #ddd"></div><div class="jj-swatch-name">JJ White</div><div class="jj-swatch-hex">#f8f8f8</div></div>
+      </div>
+    </div>
+
+    <div>
+      <span class="sg-label">Category accents</span>
+      <div class="jj-swatch-grid">
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #7B5EA7 calc(50% - 0.5px), #EDE9F8 calc(50% + 0.5px))"></div><div class="jj-swatch-name">GB Indigo</div><div class="jj-swatch-hex">#7B5EA7 | #EDE9F8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #9B1C1C calc(50% - 0.5px), #FCE8E8 calc(50% + 0.5px))"></div><div class="jj-swatch-name">NES Red</div><div class="jj-swatch-hex">#9B1C1C | #FCE8E8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #003791 calc(50% - 0.5px), #E5F0FA calc(50% + 0.5px))"></div><div class="jj-swatch-name">PS Blue</div><div class="jj-swatch-hex">#003791 | #E5F0FA</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #C0A060 calc(50% - 0.5px), #FAF4E5 calc(50% + 0.5px))"></div><div class="jj-swatch-name">SHOP Gold</div><div class="jj-swatch-hex">#C0A060 | #FAF4E5</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #0066CC calc(50% - 0.5px), #E5F0FA calc(50% + 0.5px))"></div><div class="jj-swatch-name">WEB Blue</div><div class="jj-swatch-hex">#0066CC | #E5F0FA</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:linear-gradient(to top right, #107C10 calc(50% - 0.5px), #E6F4E6 calc(50% + 0.5px))"></div><div class="jj-swatch-name">XBX Green</div><div class="jj-swatch-hex">#107C10 | #E6F4E6</div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- TYPOGRAPHY ========================================================== -->
+  <section class="sg-section" id="type">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Design Tokens · Typography</span>
+      <h2>Type scale</h2>
+      <p>Major Third ratio (×1.250). IBM Plex Mono for display and UI, IBM Plex Sans for body. Two weights only: 400 and 500.</p>
+    </div>
+
+    <div class="jj-type-specimen">
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-2xs · 8px<br>bitmap floor</div>
+        <span style="font-size:var(--jj-text-2xs);font-family:var(--jj-font-mono)">Jeff Jenx · Since 1983</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-xs · 10px<br>labels, legal</div>
+        <span style="font-size:var(--jj-text-xs);font-family:var(--jj-font-mono)">Jeff Jenx · Since 1983</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-sm · 13px<br>secondary UI</div>
+        <span style="font-size:var(--jj-text-sm);font-family:var(--jj-font-mono)">Jeff Jenx · Since 1983</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-base · 16px<br>body text</div>
+        <span style="font-size:var(--jj-text-base);font-family:var(--jj-font-sans)">Jeff Jenx · Since 1983</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-md · 20px<br>lead, card titles</div>
+        <span style="font-size:var(--jj-text-md);font-family:var(--jj-font-mono);font-weight:500;letter-spacing:-0.02em">Jeff Jenx</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-lg · 25px<br>section headings</div>
+        <span style="font-size:var(--jj-text-lg);font-family:var(--jj-font-mono);font-weight:500;letter-spacing:-0.02em">Jeff Jenx</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-xl · 31px<br>page headings</div>
+        <span style="font-size:var(--jj-text-xl);font-family:var(--jj-font-mono);font-weight:500;letter-spacing:-0.03em">Jeff Jenx</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-2xl · 39px<br>hero headings</div>
+        <span style="font-size:var(--jj-text-2xl);font-family:var(--jj-font-mono);font-weight:500;letter-spacing:-0.03em">Jeff Jenx</span>
+      </div>
+      <div class="jj-type-row">
+        <div class="jj-type-meta">--jj-text-3xl · 49px<br>display, wordmark</div>
+        <span style="font-size:var(--jj-text-3xl);font-family:var(--jj-font-mono);font-weight:500;letter-spacing:-0.04em">Jeff Jenx</span>
+      </div>
+    </div>
+
+    <div>
+      <span class="sg-label">OpenType features</span>
+      <div class="sg-row">
+        <div class="sg-col">
+          <span class="sg-label">Tabular nums (prices, stats)</span>
+          <pre style="font-family:var(--jj-font-mono);font-size:var(--jj-text-md);font-variant-numeric:tabular-nums">$ 1,234.00<br>$   987.50<br>$     5.99</pre>
+        </div>
+        <div class="sg-col">
+          <span class="sg-label">Default proportional</span>
+          <pre style="font-family:var(--jj-font-mono);font-size:var(--jj-text-md)">$ 1,234.00<br>$   987.50<br>$     5.99</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- BUTTONS ============================================================= -->
+  <section class="sg-section" id="buttons">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Components · Layer 3</span>
+      <h2>Buttons</h2>
+      <p>Four variants, three sizes. Accent buttons inherit <code class="jj-inline-code">--jj-accent</code> from nearest <code class="jj-inline-code">data-category</code> ancestor.</p>
+    </div>
+
+    <div class="sg-col">
+      <span class="sg-label">Variants</span>
+      <div class="sg-surface sg-row" style="align-items:center">
+        <button class="jj-btn jj-btn--primary">Primary</button>
+        <button class="jj-btn jj-btn--secondary">Secondary</button>
+        <button class="jj-btn jj-btn--accent" data-category="gb">Accent (GB)</button>
+        <button class="jj-btn jj-btn--ghost">Ghost</button>
+        <button class="jj-btn jj-btn--primary" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="sg-col">
+      <span class="sg-label">Sizes</span>
+      <div class="sg-surface sg-row" style="align-items:center">
+        <button class="jj-btn jj-btn--secondary jj-btn--sm">Small</button>
+        <button class="jj-btn jj-btn--secondary">Default</button>
+        <button class="jj-btn jj-btn--secondary jj-btn--lg">Large</button>
+      </div>
+    </div>
+
+    <div class="sg-col">
+      <span class="sg-label">Category accents on buttons</span>
+      <div class="sg-surface sg-row" style="align-items:center;flex-wrap:wrap">
+        <span data-category="gb">  <button class="jj-btn jj-btn--accent">GB</button></span>
+        <span data-category="nes"> <button class="jj-btn jj-btn--accent">NES</button></span>
+        <span data-category="ps"><button class="jj-btn jj-btn--accent">PS</button></span>
+        <span data-category="shop"><button class="jj-btn jj-btn--accent">SHOP</button></span>
+        <span data-category="web"> <button class="jj-btn jj-btn--accent">WEB</button></span>
+        <span data-category="xbx"><button class="jj-btn jj-btn--accent">XBX</button></span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- INPUTS ============================================================== -->
+  <section class="sg-section" id="inputs">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Components · Layer 3</span>
+      <h2>Form inputs</h2>
+      <p>All inputs use monospace font. Focus ring inherits the active accent. Works with no JS — all validation via HTML attributes.</p>
+    </div>
+
+    <div class="sg-grid-2">
+      <div class="jj-field">
+        <label class="jj-label" for="input-default">Name</label>
+        <input class="jj-input" id="input-default" type="text" placeholder="Jeffrey Jenkins">
+      </div>
+      <div class="jj-field">
+        <label class="jj-label" for="input-email">Email</label>
+        <input class="jj-input" id="input-email" type="email" placeholder="hello@jeffjenx.com">
+        <span class="jj-field-hint">Used only to send your receipt. Not stored.</span>
+      </div>
+      <div class="jj-field jj-field-error">
+        <label class="jj-label" for="input-error">Username</label>
+        <input class="jj-input" id="input-error" type="text" value="taken_name" aria-invalid="true" aria-describedby="input-error-msg">
+        <span class="jj-field-hint" id="input-error-msg" role="alert">That username is already taken.</span>
+      </div>
+      <div class="jj-field">
+        <label class="jj-label" for="input-disabled">API key</label>
+        <input class="jj-input" id="input-disabled" type="text" value="jj_live_xxxxxxxxxxxx" disabled>
+      </div>
+      <div class="jj-field" style="grid-column:1/-1">
+        <label class="jj-label" for="input-message">Message</label>
+        <textarea class="jj-textarea" id="input-message" rows="4" placeholder="Tell me about your project..."></textarea>
+      </div>
+    </div>
+
+    <div data-category="gb">
+      <span class="sg-label">Accent focus ring inherits category (GB Indigo shown)</span>
+      <div class="jj-field" style="max-width:320px">
+        <label class="jj-label" for="input-gb">ROM filename</label>
+        <input class="jj-input" id="input-gb" type="text" placeholder="gb_home_v1.0.0.gb">
+        <span class="jj-field-hint">GB Home project — accent is Game Boy Indigo</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- CARDS =============================================================== -->
+  <section class="sg-section" id="cards">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Components · Layer 3</span>
+      <h2>Cards</h2>
+      <p>Two card types: content card and product card. Both use the accent bar to signal category.</p>
+    </div>
+
+    <div>
+      <span class="sg-label">Content cards</span>
+      <div class="sg-grid-2">
+        <div class="jj-card">
+          <div class="jj-card-meta">Project</div>
+          <h3 class="jj-card-title">GB Home</h3>
+          <p class="jj-card-body">A launch ROM for custom Game Boy flash carts. Boots directly into a home menu with save state management and library organization.</p>
+          <div class="jj-card-footer">
+            <span class="jj-tag jj-tag--default">Open source</span>
+            <a href="#" class="jj-btn jj-btn--ghost jj-btn--sm">View →</a>
+          </div>
+        </div>
+        <div class="jj-card jj-card--accent" data-category="gb">
+          <div class="jj-category-label">GB Home</div>
+          <h3 class="jj-card-title">GB Home</h3>
+          <p class="jj-card-body">Same card with <code class="jj-inline-code">data-category="gb"</code> on the element and <code class="jj-inline-code">.jj-card--accent</code> for the border-left. Accent color cascades to all children automatically.</p>
+          <div class="jj-card-footer">
+            <span class="jj-tag jj-tag--accent">GB Home</span>
+            <a href="#" class="jj-btn jj-btn--accent jj-btn--sm">View →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="sg-label">Product cards</span>
+      <div class="sg-grid-3">
+
+        <div data-category="gb">
+          <a href="#" class="jj-product-card">
+            <div class="jj-product-card-img" aria-label="Product image placeholder">
+              <div class="jj-product-card-accent-bar"></div>
+              IMAGE
+            </div>
+            <div class="jj-product-card-body">
+              <span class="jj-category-label">GB Home</span>
+              <h3 class="jj-card-title" style="font-size:var(--jj-text-base)">GB Home T-Shirt</h3>
+              <p class="jj-card-body">Classic fit, printed on heavyweight cotton.</p>
+            </div>
+            <div class="jj-product-card-footer">
+              <span class="jj-card-price">$28.00</span>
+              <span class="jj-tag jj-tag--accent">Zazzle</span>
+            </div>
+          </a>
+        </div>
+
+        <div data-category="nes">
+          <a href="#" class="jj-product-card">
+            <div class="jj-product-card-img" aria-label="Product image placeholder">
+              <div class="jj-product-card-accent-bar"></div>
+              IMAGE
+            </div>
+            <div class="jj-product-card-body">
+              <span class="jj-category-label">NES</span>
+              <h3 class="jj-card-title" style="font-size:var(--jj-text-base)">NES Cartridge Poster</h3>
+              <p class="jj-card-body">18×24 print on archival matte paper.</p>
+            </div>
+            <div class="jj-product-card-footer">
+              <span class="jj-card-price">$22.00</span>
+              <span class="jj-tag jj-tag--accent">Redbubble</span>
+            </div>
+          </a>
+        </div>
+
+        <div data-category="web">
+          <a href="#" class="jj-product-card">
+            <div class="jj-product-card-img" aria-label="Product image placeholder">
+              <div class="jj-product-card-accent-bar"></div>
+              IMAGE
+            </div>
+            <div class="jj-product-card-body">
+              <span class="jj-category-label">Consulting</span>
+              <h3 class="jj-card-title" style="font-size:var(--jj-text-base)">Web Audit · 1hr Session</h3>
+              <p class="jj-card-body">Accessibility, performance, and architecture review.</p>
+            </div>
+            <div class="jj-product-card-footer">
+              <span class="jj-card-price">$150.00</span>
+              <span class="jj-tag jj-tag--accent">Booking</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- CATEGORIES ========================================================== -->
+  <section class="sg-section" id="categories">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Design System · Category Scoping</span>
+      <h2>Category accent system</h2>
+      <p>Add <code class="jj-inline-code">data-category="[name]"</code> to any ancestor. All <code class="jj-inline-code">--jj-accent</code> references inside it resolve to that category's color automatically. No extra CSS required.</p>
+    </div>
+
+    <div class="sg-grid-2">
+      <div data-category="gb" class="jj-card jj-card--accent">
+        <div class="jj-card-meta">data-category="gb"</div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span class="jj-mark jj-mark--accent jj-mark--sm" aria-hidden="true">JJ</span>
+          <span class="jj-category-label">GB Home</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <span class="jj-tag jj-tag--accent">Flash cart</span>
+          <span class="jj-tag jj-tag--solid">ROM</span>
+          <button class="jj-btn jj-btn--accent jj-btn--sm">Shop</button>
+        </div>
+      </div>
+
+      <div data-category="nes" class="jj-card jj-card--accent">
+        <div class="jj-card-meta">data-category="nes"</div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span class="jj-mark jj-mark--accent jj-mark--sm" aria-hidden="true">JJ</span>
+          <span class="jj-category-label">NES</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <span class="jj-tag jj-tag--accent">Famicom</span>
+          <span class="jj-tag jj-tag--solid">Cartridge</span>
+          <button class="jj-btn jj-btn--accent jj-btn--sm">Shop</button>
+        </div>
+      </div>
+
+      <div data-category="xbx" class="jj-card jj-card--accent">
+        <div class="jj-card-meta">data-category="xbx"</div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span class="jj-mark jj-mark--accent jj-mark--sm" aria-hidden="true">JJ</span>
+          <span class="jj-category-label">XBX</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <span class="jj-tag jj-tag--accent">Microsoft</span>
+          <span class="jj-tag jj-tag--solid">Gaming</span>
+          <button class="jj-btn jj-btn--accent jj-btn--sm">Shop</button>
+        </div>
+      </div>
+
+      <div data-category="web" class="jj-card jj-card--accent">
+        <div class="jj-card-meta">data-category="web"</div>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <span class="jj-mark jj-mark--accent jj-mark--sm" aria-hidden="true">JJ</span>
+          <span class="jj-category-label">Consulting</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <span class="jj-tag jj-tag--accent">Web dev</span>
+          <span class="jj-tag jj-tag--solid">Book now</span>
+          <button class="jj-btn jj-btn--accent jj-btn--sm">Book</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- PE LAYERS =========================================================== -->
+  <section class="sg-section" id="layers">
+    <div class="sg-section-header">
+      <span class="sg-layer-badge">Architecture · Progressive Enhancement</span>
+      <h2>Enhancement layers</h2>
+      <p>Each layer is self-contained. Remove any layer and everything beneath it still works. This file is Layer 3. The token file is Layer 0.</p>
+    </div>
+
+    <div class="jj-code" role="figure" aria-label="Progressive enhancement layer map">
+<span class="comment">/* ─────────────────────────────────────────────────── */</span>
+<span class="comment">/*  JEFF JENX · PROGRESSIVE ENHANCEMENT LAYER MAP     */</span>
+<span class="comment">/* ─────────────────────────────────────────────────── */</span>
+
+<span class="key">Layer 0</span>  <span class="value">Raw HTML</span>
+         <span class="comment">Content readable in Lynx, w3m, any text browser.</span>
+         <span class="comment">Links work. Forms submit. Headings convey structure.</span>
+         <span class="comment">The [JJ] text string renders correctly.</span>
+
+<span class="key">Layer 1</span>  <span class="value">@layer base</span>
+         <span class="comment">Reset + jeffjenx-tokens.css</span>
+         <span class="comment">Custom properties defined. Zero layout assumptions.</span>
+         <span class="comment">Compatible: Chrome 49+, Firefox 31+, Safari 9.1+</span>
+
+<span class="key">Layer 2</span>  <span class="value">@layer type</span>
+         <span class="comment">Typographic scale, rhythm, readable body text.</span>
+         <span class="comment">No color beyond inherited defaults.</span>
+
+<span class="key">Layer 3</span>  <span class="value">@layer layout</span>
+         <span class="comment">CSS Grid + Flexbox structure.</span>
+         <span class="comment">Compatible: Chrome 57+, Firefox 52+, Safari 10.1+</span>
+
+<span class="key">Layer 4</span>  <span class="value">@layer enhanced</span>
+         <span class="comment">Full component styles, custom property theming,</span>
+         <span class="comment">data-category accent scoping, focus rings.</span>
+
+<span class="key">Layer 5</span>  <span class="value">@layer motion  (prefers-reduced-motion gated)</span>
+         <span class="comment">Hover transitions, micro-animations.</span>
+         <span class="comment">Automatically disabled for users who request it.</span>
+
+<span class="key">Layer 6</span>  <span class="value">&lt;script&gt;  (non-critical)</span>
+         <span class="comment">Theme toggle, copy-to-clipboard, dynamic filtering.</span>
+         <span class="comment">Page is fully functional without it.</span>
+    </div>
+  </section>
+
+</div><!-- /.sg-main -->
+</main>
+
+<!-- =====================================================================
+     LAYER 6 — JAVASCRIPT (NON-CRITICAL)
+     Page is complete and functional without this block.
+     ===================================================================== -->
+<script>
+(function() {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme-toggle';
+    btn.ariaLabel = 'Toggle dark mode';
+    btn.textContent = 'Dark';
+    document.getElementsByClassName('sg-nav')[0].appendChild(btn);
+  }
+  var html = document.documentElement;
+  var stored = localStorage.getItem('jj-theme');
+  if (stored) {
+    html.setAttribute('data-theme', stored);
+    btn.textContent = stored === 'dark' ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? 'Light' : 'Dark';
+    try { localStorage.setItem('jj-theme', next); } catch(e) {}
+  });
+})();
+</script>
+
+</body>
+</html>

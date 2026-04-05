@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Jenx · Brand Strategy</title>
+<meta name="description" content="Jeff Jenx brand foundation, personality, mark system, color, and design principles.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="jeffjenx-tokens.css">
+
+<style>
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    font-size: 16px;
+    background: var(--jj-bg);
+    color: var(--jj-fg);
+    cursor: default;
+    font-family: var(--jj-font-sans);
+    scroll-padding-top: 4rem; /* 64px - safe ceiling for the nav bar */
+    -webkit-text-size-adjust: 100%;
+  }
+  body { min-height: 100vh; }
+  img, svg { display: block; max-width: 100%; }
+  a { color: var(--jj-accent, var(--jj-fg)); text-underline-offset: 3px; }
+  a:hover { opacity: 0.75; }
+}
+
+@layer type {
+  [data-theme="light"] ::selection {
+    color: var(--jj-accent-dark);
+    background: var(--jj-accent-light);
+  }
+
+  [data-theme="dark"] ::selection {
+    color: var(--jj-accent-light);
+    background: var(--jj-accent-dark);
+  }
+}
+
+@layer layout {
+  .bs-nav {
+    position: sticky;
+    top: 0;
+    z-index: var(--jj-z-raised);
+    background: var(--jj-bg);
+    border-bottom: 1px solid var(--jj-border-color);
+    padding: var(--jj-space-3) var(--jj-space-6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--jj-space-4);
+    flex-wrap: wrap;
+  }
+  .bs-nav-links {
+    display: flex;
+    gap: var(--jj-space-4);
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  .bs-wrap {
+    max-width: var(--jj-width-full);
+    margin: 0 auto;
+    padding: 0 var(--jj-space-6);
+  }
+  .bs-main {
+    padding: var(--jj-space-12) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-16);
+  }
+  .bs-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-8);
+  }
+  .bs-section-header {
+    border-bottom: 1px solid var(--jj-border-color);
+    padding-bottom: var(--jj-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-2);
+  }
+  .bs-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--jj-space-4);
+  }
+  .bs-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--jj-space-4);
+  }
+  .bs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--jj-space-3);
+    align-items: flex-start;
+  }
+  .bs-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-3);
+  }
+}
+
+@layer enhanced {
+  .jj-nav-link {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-sm);
+    font-weight: var(--jj-weight-medium);
+    letter-spacing: var(--jj-tracking-wide);
+    color: var(--jj-fg-muted);
+    text-decoration: none;
+    padding: var(--jj-space-1) 0;
+    border-bottom: 2px solid transparent;
+    transition: color 80ms, border-color 80ms;
+  }
+  .jj-nav-link:hover {
+    color: var(--jj-fg);
+    border-bottom-color: var(--jj-fg);
+    opacity: 1;
+  }
+
+  .bs-layer-badge {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-widest);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle);
+  }
+
+  .bs-section-title {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xl);
+    font-weight: var(--jj-weight-medium);
+    letter-spacing: var(--jj-tracking-tight);
+    color: var(--jj-fg);
+    line-height: var(--jj-leading-tight);
+  }
+
+  .bs-lead {
+    font-family: var(--jj-font-sans);
+    font-size: var(--jj-text-base);
+    line-height: var(--jj-leading-normal);
+    color: var(--jj-fg-muted);
+    max-width: 68ch;
+  }
+
+  .bs-card {
+    background: var(--jj-bg-raised);
+    border: 1px solid var(--jj-border-color);
+    border-radius: var(--jj-radius-lg);
+    padding: var(--jj-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-3);
+  }
+
+  .bs-card-title {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-sm);
+    font-weight: var(--jj-weight-medium);
+    letter-spacing: var(--jj-tracking-wider);
+    text-transform: uppercase;
+    color: var(--jj-fg);
+  }
+
+  .bs-card-body {
+    font-family: var(--jj-font-sans);
+    font-size: var(--jj-text-sm);
+    line-height: var(--jj-leading-normal);
+    color: var(--jj-fg-muted);
+  }
+
+  .bs-pill-row {
+    display: flex;
+    gap: var(--jj-space-2);
+    flex-wrap: wrap;
+  }
+
+  .jj-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--jj-space-1) var(--jj-space-2);
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    font-weight: var(--jj-weight-medium);
+    letter-spacing: var(--jj-tracking-wider);
+    text-transform: uppercase;
+    border-radius: var(--jj-radius-sm);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .jj-tag--default { background: var(--jj-bg-sunken); color: var(--jj-fg-muted); }
+  .jj-tag--accent  { background: var(--jj-accent-light, var(--jj-bg-sunken)); color: var(--jj-accent, var(--jj-fg)); }
+  .jj-tag--solid   { background: var(--jj-fg); color: var(--jj-bg); }
+  .jj-tag--outline { background: transparent; color: var(--jj-fg-muted); border: 1px solid var(--jj-border-color); }
+
+  .bs-mark-surface {
+    background: var(--jj-bg-raised);
+    border: 1px solid var(--jj-border-color);
+    border-radius: var(--jj-radius-lg);
+    padding: var(--jj-space-6);
+    display: flex;
+    gap: var(--jj-space-8);
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .bs-mark-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--jj-space-3);
+  }
+
+  .bs-mark-caption {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-wider);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle);
+  }
+
+  .bs-light-pad,
+  .bs-dark-pad,
+  .bs-accent-pad {
+    border-radius: var(--jj-radius-sm);
+    padding: var(--jj-space-3);
+    display: inline-flex;
+  }
+
+  .bs-light-pad {
+    background: var(--jj-smoke);
+  }
+
+  .bs-dark-pad {
+    background: var(--jj-ink);
+  }
+
+  .bs-accent-pad {
+    background: transparent;
+  }
+
+  .bs-rule-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-3);
+  }
+
+  .bs-rule {
+    display: flex;
+    gap: var(--jj-space-3);
+    align-items: flex-start;
+  }
+
+  .bs-rule::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--jj-fg-subtle);
+    flex-shrink: 0;
+    margin-top: 9px;
+  }
+
+  .bs-rule-text {
+    font-family: var(--jj-font-sans);
+    font-size: var(--jj-text-sm);
+    line-height: var(--jj-leading-normal);
+    color: var(--jj-fg-muted);
+  }
+
+  .bs-fallback-box {
+    background: var(--jj-bg-sunken);
+    border: 1px solid var(--jj-border-color);
+    border-radius: var(--jj-radius-sm);
+    padding: var(--jj-space-4) var(--jj-space-5);
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-md);
+    color: var(--jj-fg);
+    letter-spacing: var(--jj-tracking-wide);
+  }
+
+  .bs-swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--jj-space-3);
+  }
+
+  .jj-swatch { display: flex; flex-direction: column; gap: var(--jj-space-2); }
+  .jj-swatch-block { height: 48px; border-radius: var(--jj-radius-sm); border: 1px solid rgba(0,0,0,0.08); }
+  .jj-swatch-name { font-family: var(--jj-font-mono); font-size: var(--jj-text-xs); font-weight: var(--jj-weight-medium); color: var(--jj-fg); }
+  .jj-swatch-hex  { font-family: var(--jj-font-mono); font-size: var(--jj-text-xs); color: var(--jj-fg-subtle); }
+
+  .bs-accent-list { display: flex; flex-direction: column; gap: var(--jj-space-2); }
+
+  .bs-accent-item {
+    display: flex;
+    align-items: center;
+    gap: var(--jj-space-4);
+    background: var(--jj-bg-raised);
+    border: 1px solid var(--jj-border-color);
+    border-radius: var(--jj-radius-lg);
+    padding: var(--jj-space-3) var(--jj-space-4);
+  }
+
+  .bs-accent-block {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--jj-radius-sm);
+    flex-shrink: 0;
+  }
+
+  .bs-accent-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+
+  .bs-accent-name {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-sm);
+    font-weight: var(--jj-weight-medium);
+    color: var(--jj-fg);
+  }
+
+  .bs-accent-desc {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    color: var(--jj-fg-subtle);
+    letter-spacing: var(--jj-tracking-wide);
+  }
+
+  .bs-type-list { display: flex; flex-direction: column; gap: var(--jj-space-3); }
+
+  .bs-type-item {
+    background: var(--jj-bg-raised);
+    border: 1px solid var(--jj-border-color);
+    border-radius: var(--jj-radius-lg);
+    padding: var(--jj-space-4) var(--jj-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--jj-space-2);
+  }
+
+  .bs-type-role {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-widest);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle);
+  }
+
+  .bs-type-desc {
+    font-family: var(--jj-font-sans);
+    font-size: var(--jj-text-xs);
+    color: var(--jj-fg-subtle);
+    margin-top: var(--jj-space-1);
+  }
+
+  .jj-divider { border: none; border-top: 1px solid var(--jj-border-color); }
+
+  #theme-toggle {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-wider);
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--jj-border-color);
+    color: var(--jj-fg-muted);
+    padding: var(--jj-space-2) var(--jj-space-3);
+    border-radius: var(--jj-radius-md);
+    cursor: pointer;
+  }
+  #theme-toggle:hover { background: var(--jj-bg-sunken); }
+
+  .bs-inline-code {
+    font-family: var(--jj-font-mono);
+    font-size: 0.875em;
+    background: var(--jj-bg-sunken);
+    padding: 1px 5px;
+    border-radius: var(--jj-radius-sm);
+    color: var(--jj-fg);
+  }
+
+  .bs-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--jj-space-4);
+    text-decoration: none;
+    color: inherit;
+  }
+  .bs-lockup-text { display: flex; flex-direction: column; gap: 2px; }
+  .bs-lockup-name {
+    font-family: var(--jj-font-mono);
+    font-weight: var(--jj-weight-medium);
+    font-size: var(--jj-text-md);
+    letter-spacing: var(--jj-tracking-tight);
+    line-height: 1;
+    color: var(--jj-fg);
+  }
+  .bs-lockup-sub {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-widest);
+    text-transform: uppercase;
+    color: var(--jj-fg-subtle);
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="bs-nav" aria-label="Brand strategy navigation">
+  <a href="#" class="bs-lockup" aria-label="Jeff Jenx home">
+    <span class="jj-mark jj-mark--sm" aria-hidden="true">JJ</span>
+    <span class="bs-lockup-text">
+      <span class="bs-lockup-name">Jeff Jenx</span>
+      <span class="bs-lockup-sub">Brand Strategy v1.0</span>
+    </span>
+  </a>
+  <ul class="bs-nav-links" role="list">
+    <li><a href="#foundation"  class="jj-nav-link">Foundation</a></li>
+    <li><a href="#personality" class="jj-nav-link">Personality</a></li>
+    <li><a href="#mark"        class="jj-nav-link">Mark</a></li>
+    <li><a href="#fallback"    class="jj-nav-link">Fallback</a></li>
+    <li><a href="#color"       class="jj-nav-link">Color</a></li>
+    <li><a href="#typography"  class="jj-nav-link">Typography</a></li>
+    <li><a href="#principles"  class="jj-nav-link">Principles</a></li>
+  </ul>
+</nav>
+
+<main class="bs-wrap">
+<div class="bs-main">
+
+  <!-- HERO -->
+  <div style="display:flex;align-items:center;gap:var(--jj-space-6)">
+    <span class="jj-mark jj-mark--lg" aria-hidden="true">JJ</span>
+    <div>
+      <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-3xl);font-weight:var(--jj-weight-medium);color:var(--jj-fg);letter-spacing:var(--jj-tracking-tight);line-height:1">Jeff Jenx</div>
+      <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);color:var(--jj-fg-subtle);letter-spacing:var(--jj-tracking-widest);text-transform:uppercase;margin-top:var(--jj-space-2)">Accuracy · Simplicity · Performance</div>
+    </div>
+  </div>
+
+  <hr class="jj-divider">
+
+  <!-- 01 FOUNDATION -->
+  <section class="bs-section" id="foundation">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">01 · Brand Foundation</span>
+      <h2 class="bs-section-title">What Jeff Jenx is</h2>
+      <p class="bs-lead">A single-person LLC operating as a unified commercial storefront and creative studio. Products, consulting, and communities organized under one identity.</p>
+    </div>
+    <div class="bs-grid-2">
+      <div class="bs-card">
+        <div class="bs-card-title">What it is</div>
+        <p class="bs-card-body">A single-person LLC operating as a unified commercial storefront and creative studio. Products, consulting, and communities organized under one identity.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">What it is not</div>
+        <p class="bs-card-body">Not corporate. Not trendy. Not trying to look bigger than it is. Not sacrificing quality for speed. Not collecting your data.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Origin</div>
+        <p class="bs-card-body">"Jeff Jenx" is a compression of Jeffrey Jenkins into 8 characters — the maximum of a 1980s computer login. The name carries that constraint as a feature, not a limitation.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Promise</div>
+        <p class="bs-card-body">Everything released under this name is built with care, tested to work, and designed to last. Small output, high standard.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 02 PERSONALITY -->
+  <section class="bs-section" id="personality">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">02 · Personality</span>
+      <h2 class="bs-section-title">Brand character</h2>
+      <p class="bs-lead">Confident without boasting. Technical without jargon. Direct without coldness. Writes like a person, not a press release.</p>
+    </div>
+
+    <div>
+      <span style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);letter-spacing:var(--jj-tracking-wider);text-transform:uppercase;color:var(--jj-fg-subtle);display:block;margin-bottom:var(--jj-space-3)">Attributes</span>
+      <div class="bs-pill-row">
+        <span class="jj-tag jj-tag--solid">precise</span>
+        <span class="jj-tag jj-tag--solid">restrained</span>
+        <span class="jj-tag jj-tag--solid">technical</span>
+        <span class="jj-tag jj-tag--solid">direct</span>
+        <span class="jj-tag jj-tag--outline">not corporate</span>
+        <span class="jj-tag jj-tag--outline">not loud</span>
+        <span class="jj-tag jj-tag--outline">not decorative</span>
+        <span class="jj-tag jj-tag--outline">not rushed</span>
+      </div>
+    </div>
+
+    <div class="bs-grid-2">
+      <div class="bs-card">
+        <div class="bs-card-title">Voice</div>
+        <p class="bs-card-body">Confident without boasting. Technical without jargon. Direct without coldness. Writes like a person, not a press release. Short sentences. No filler.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Reference brands</div>
+        <p class="bs-card-body">Apple (breathing room, product-forward), IBM (grid, system, structure), Nintendo (clean, powerful, joyful without being childish), Dieter Rams (function is the form).</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 03 MARK -->
+  <section class="bs-section" id="mark">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">03 · Mark System</span>
+      <h2 class="bs-section-title">Logomark</h2>
+      <p class="bs-lead">Filled square. No stroke, ever. Fill is the only shape. The <code class="bs-inline-code">[JJ]</code> text string is the universal plain-text fallback.</p>
+    </div>
+
+    <div>
+      <span style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);letter-spacing:var(--jj-tracking-wider);text-transform:uppercase;color:var(--jj-fg-subtle);display:block;margin-bottom:var(--jj-space-4)">Variants &amp; scale</span>
+      <div class="bs-mark-surface">
+        <div class="bs-mark-item">
+          <span class="bs-light-pad">
+            <span class="jj-mark" style="background:var(--jj-black);color:var(--jj-white)" aria-label="Jeff Jenx mark, light">JJ</span>
+          </span>
+          <span class="bs-mark-caption">Light</span>
+        </div>
+        <div class="bs-mark-item">
+          <span class="bs-dark-pad">
+            <span class="jj-mark" style="background:var(--jj-white);color:var(--jj-black)" aria-label="Jeff Jenx mark, dark">JJ</span>
+          </span>
+          <span class="bs-mark-caption">Dark</span>
+        </div>
+        <div class="bs-mark-item" data-category="gb">
+          <span class="bs-accent-pad">
+            <span class="jj-mark" style="background:var(--jj-accent);color:var(--jj-white)" aria-label="Jeff Jenx mark, accent">JJ</span>
+          </span>
+          <span class="bs-mark-caption">Accent</span>
+        </div>
+        <div class="bs-mark-item">
+          <div style="display:flex;align-items:flex-end;gap:var(--jj-space-3)">
+            <span class="jj-mark jj-mark--sm" aria-label="Small">JJ</span>
+            <span class="jj-mark" aria-label="Default">JJ</span>
+            <span class="jj-mark jj-mark--lg" aria-label="Large">JJ</span>
+          </div>
+          <span class="bs-mark-caption">Scale</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-rule-list">
+      <div class="bs-rule"><span class="bs-rule-text">Filled square, no stroke, ever. Fill is the only shape.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Fill = surface foreground (black on light, white on dark). JJ = surface background. Always inverted.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Category accent replaces the fill color only. JJ remains the surface background color.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Sharp corners only. rx="0". No softening.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Logotype "Jeff Jenx" always in surface neutral — never takes accent color.</span></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 04 FALLBACK -->
+  <section class="bs-section" id="fallback">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">04 · Text Fallback System</span>
+      <h2 class="bs-section-title">Plain-text fallback</h2>
+      <p class="bs-lead">Used wherever images are unavailable — plain text browsers, markdown, README files, git history, screen readers, terminal output.</p>
+    </div>
+
+    <div class="bs-fallback-box">[JJ] Jeff Jenx</div>
+
+    <div class="bs-rule-list">
+      <div class="bs-rule"><span class="bs-rule-text">Brackets are structural notation, not decoration. They are the square mark expressed in ASCII.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Never replace brackets with parentheses, pipes, or other delimiters. [JJ] is the canonical form.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Category variant: [JJ] Jeff Jenx · GB Home — separator is a centered dot, not a dash.</span></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 05 COLOR -->
+  <section class="bs-section" id="color">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">05 · Color System</span>
+      <h2 class="bs-section-title">Color</h2>
+      <p class="bs-lead">Monochrome base. Category accents applied via <code class="bs-inline-code">data-category</code> on any ancestor element. The brand reads black and white first. Color is signal, not wallpaper.</p>
+    </div>
+
+    <div>
+      <span style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);letter-spacing:var(--jj-tracking-wider);text-transform:uppercase;color:var(--jj-fg-subtle);display:block;margin-bottom:var(--jj-space-4)">Base palette</span>
+      <div class="bs-swatch-grid">
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#0a0a0a"></div><div class="jj-swatch-name">JJ Black</div><div class="jj-swatch-hex">#0a0a0a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#1a1a1a"></div><div class="jj-swatch-name">Ink</div><div class="jj-swatch-hex">#1a1a1a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#2a2a2a"></div><div class="jj-swatch-name">Charcoal</div><div class="jj-swatch-hex">#2a2a2a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#3a3a3a"></div><div class="jj-swatch-name">Border</div><div class="jj-swatch-hex">#3a3a3a</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#888888"></div><div class="jj-swatch-name">Muted</div><div class="jj-swatch-hex">#888888</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#c8c8c8"></div><div class="jj-swatch-name">Silver</div><div class="jj-swatch-hex">#c8c8c8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#e8e8e8;border-color:#ccc"></div><div class="jj-swatch-name">Smoke</div><div class="jj-swatch-hex">#e8e8e8</div></div>
+        <div class="jj-swatch"><div class="jj-swatch-block" style="background:#f8f8f8;border-color:#ddd"></div><div class="jj-swatch-name">JJ White</div><div class="jj-swatch-hex">#f8f8f8</div></div>
+      </div>
+    </div>
+
+    <div>
+      <span style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xs);letter-spacing:var(--jj-tracking-wider);text-transform:uppercase;color:var(--jj-fg-subtle);display:block;margin-bottom:var(--jj-space-4)">Category accents</span>
+      <div class="bs-accent-list">
+        <div class="bs-accent-item" data-category="gb">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">GB Indigo · #7B5EA7</div>
+            <div class="bs-accent-desc">GB Home · handheld projects · purple-grey housing tint</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">gb</span>
+        </div>
+        <div class="bs-accent-item" data-category="nes">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">NES Red · #9B1C1C</div>
+            <div class="bs-accent-desc">NES Home · console projects · cartridge label maroon</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">nes</span>
+        </div>
+        <div class="bs-accent-item" data-category="ps">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">PS Blue · #107C10</div>
+            <div class="bs-accent-desc">PS Home · personal computer gaming · ps blue</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">ps</span>
+        </div>
+        <div class="bs-accent-item" data-category="shop">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">SHOP Gold · #C0A060</div>
+            <div class="bs-accent-desc">General shop · default category · unaffiliated products</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">shop</span>
+        </div>
+        <div class="bs-accent-item" data-category="web">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">WEB Blue · #0066CC</div>
+            <div class="bs-accent-desc">consulting · technical services · development work</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">web</span>
+        </div>
+        <div class="bs-accent-item" data-category="xbx">
+          <div class="bs-accent-block" style="background:var(--jj-accent)"></div>
+          <div class="bs-accent-info">
+            <div class="bs-accent-name">XBX Green · #107C10</div>
+            <div class="bs-accent-desc">XBX Home · personal computer gaming · xbox green</div>
+          </div>
+          <span class="jj-tag jj-tag--accent">xbx</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-rule-list">
+      <div class="bs-rule"><span class="bs-rule-text">Accent appears on: mark fill, category label, nav indicator, card border-left, tag pill. Nowhere else.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">New product lines get a new accent. Accent is derived from the real-world colors of that product's hardware or brand.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">The brand reads black and white first. Color is signal, not wallpaper.</span></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 06 TYPOGRAPHY -->
+  <section class="bs-section" id="typography">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">06 · Typography</span>
+      <h2 class="bs-section-title">Type system</h2>
+      <p class="bs-lead">Two weights only: 400 regular and 500 medium. Never bold (700) in brand contexts. Major Third ratio (×1.250).</p>
+    </div>
+
+    <div class="bs-type-list">
+      <div class="bs-type-item">
+        <div class="bs-type-role">Primary · Display + UI</div>
+        <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-xl);font-weight:var(--jj-weight-medium);color:var(--jj-fg);line-height:var(--jj-leading-tight)">IBM Plex Mono</div>
+        <div class="bs-type-desc">Wordmark · headings · code · labels · UI elements · monogram</div>
+      </div>
+      <div class="bs-type-item">
+        <div class="bs-type-role">Secondary · Body</div>
+        <div style="font-family:var(--jj-font-sans);font-size:var(--jj-text-lg);font-weight:var(--jj-weight-regular);color:var(--jj-fg);line-height:var(--jj-leading-tight)">IBM Plex Sans</div>
+        <div class="bs-type-desc">Long-form copy · product descriptions · prose · metadata</div>
+      </div>
+      <div class="bs-type-item">
+        <div class="bs-type-role">Future · Custom</div>
+        <div style="font-family:var(--jj-font-mono);font-size:var(--jj-text-lg);font-weight:var(--jj-weight-medium);color:var(--jj-fg);line-height:var(--jj-leading-tight)">JJ Mono & Sans <span style="font-size:var(--jj-text-sm);color:var(--jj-fg-subtle)">(Phase 3+)</span></div>
+        <div class="bs-type-desc">Fork of IBM Plex Mono & Sans with custom alternates — crossbar J, modified numerals, JJ-specific glyphs</div>
+      </div>
+    </div>
+
+    <div class="bs-rule-list">
+      <div class="bs-rule"><span class="bs-rule-text">Two weights only: 400 regular and 500 medium. Never bold (700) in brand contexts.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Tabular numbers enabled by default on all numeric UI elements via font-variant-numeric: tabular-nums.</span></div>
+      <div class="bs-rule"><span class="bs-rule-text">Type scales from 8px bitmap-equivalent up to display — each step must be legible and intentional.</span></div>
+    </div>
+  </section>
+
+  <hr class="jj-divider">
+
+  <!-- 07 PRINCIPLES -->
+  <section class="bs-section" id="principles">
+    <div class="bs-section-header">
+      <span class="bs-layer-badge">07 · Design Principles</span>
+      <h2 class="bs-section-title">Principles</h2>
+      <p class="bs-lead">Six principles that govern every design decision under this brand.</p>
+    </div>
+
+    <div class="bs-grid-3">
+      <div class="bs-card">
+        <div class="bs-card-title">Progressive</div>
+        <p class="bs-card-body">Works with no CSS and no JS. Each layer above that is additive. The brand applies at every layer.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Earned</div>
+        <p class="bs-card-body">Every element must justify its presence. If it doesn't communicate, it doesn't ship.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Scalable</div>
+        <p class="bs-card-body">Designed at 8px. Comfortable at 16px. Spacious at 64px. One system, every resolution.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Private</div>
+        <p class="bs-card-body">Zero personal data collected or stored. Privacy is a design constraint, not a policy checkbox.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Modular</div>
+        <p class="bs-card-body">New product lines plug into the system via accent color. The framework never needs to change.</p>
+      </div>
+      <div class="bs-card">
+        <div class="bs-card-title">Honest</div>
+        <p class="bs-card-body">Sharp corners. No gradients. No shadows. No decoration. The work speaks for itself.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<script>
+(function() {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme-toggle';
+    btn.ariaLabel = 'Toggle dark mode';
+    btn.textContent = 'Dark';
+    document.getElementsByClassName('bs-nav')[0].appendChild(btn);
+  }
+  var html = document.documentElement;
+  var stored = localStorage.getItem('jj-theme');
+  if (stored) {
+    html.setAttribute('data-theme', stored);
+    btn.textContent = stored === 'dark' ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? 'Light' : 'Dark';
+    try { localStorage.setItem('jj-theme', next); } catch(e) {}
+  });
+})();
+</script>
+
+</body>
+</html>
