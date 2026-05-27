@@ -413,7 +413,7 @@
 <body>
 
 <nav class="bs-nav" aria-label="Brand strategy navigation">
-  <a href="#" class="bs-lockup" aria-label="Jeff Jenx home">
+  <a href="index.html" class="bs-lockup" aria-label="Jeff Jenx home">
     <span class="jj-mark jj-mark--sm" aria-hidden="true">JJ</span>
     <span class="bs-lockup-text">
       <span class="bs-lockup-name">Jeff Jenx</span>
@@ -750,17 +750,31 @@
     document.getElementsByClassName('bs-nav')[0].appendChild(btn);
   }
   var html = document.documentElement;
+  var systemPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   var stored = localStorage.getItem('jj-theme');
-  if (stored) {
-    html.setAttribute('data-theme', stored);
-    btn.textContent = stored === 'dark' ? 'Light' : 'Dark';
-  }
+  var hasOverride = localStorage.getItem('jj-theme-override') === 'true';
+  var currentTheme = (hasOverride && stored) ? stored : systemPref;
+  
+  html.setAttribute('data-theme', currentTheme);
+  btn.textContent = currentTheme === 'dark' ? 'Light' : 'Dark';
+  
   btn.addEventListener('click', function() {
     var current = html.getAttribute('data-theme');
     var next = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     btn.textContent = next === 'dark' ? 'Light' : 'Dark';
-    try { localStorage.setItem('jj-theme', next); } catch(e) {}
+    try {
+      localStorage.setItem('jj-theme', next);
+      localStorage.setItem('jj-theme-override', 'true');
+    } catch(e) {}
+  });
+  
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (!localStorage.getItem('jj-theme-override')) {
+      var newTheme = e.matches ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      btn.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+    }
   });
 })();
 </script>

@@ -572,7 +572,7 @@ canvas { display: block; image-rendering: pixelated; }
 
 <!-- NAV -->
 <nav class="ic-nav" aria-label="Iconography tool navigation">
-  <a href="#" class="ic-lockup" aria-label="Jeff Jenx home">
+  <a href="index.html" class="ic-lockup" aria-label="Jeff Jenx home">
     <span class="jj-mark" aria-hidden="true">JJ</span>
     <span class="ic-lockup-text">
       <span class="ic-lockup-name">Jeff Jenx</span>
@@ -978,15 +978,30 @@ canvas { display: block; image-rendering: pixelated; }
 // ---- THEME TOGGLE -------------------------------------------
 var btn = document.getElementById('theme-toggle');
 var html = document.documentElement;
+var systemPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 var stored = localStorage.getItem('jj-theme');
-if (stored) { html.setAttribute('data-theme', stored); btn.textContent = stored === 'dark' ? 'Light' : 'Dark'; }
+var hasOverride = localStorage.getItem('jj-theme-override') === 'true';
+var currentTheme = (hasOverride && stored) ? stored : systemPref;
+html.setAttribute('data-theme', currentTheme);
+btn.textContent = currentTheme === 'dark' ? 'Light' : 'Dark';
 btn.addEventListener('click', function() {
   var c = html.getAttribute('data-theme');
   var n = c === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', n);
   btn.textContent = n === 'dark' ? 'Light' : 'Dark';
-  try { localStorage.setItem('jj-theme', n); } catch(e) {}
+  try {
+    localStorage.setItem('jj-theme', n);
+    localStorage.setItem('jj-theme-override', 'true');
+  } catch(e) {}
   scheduleRender();
+});
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+  if (!localStorage.getItem('jj-theme-override')) {
+    var newTheme = e.matches ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    btn.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+    scheduleRender();
+  }
 });
 
 // ---- STATE --------------------------------------------------
