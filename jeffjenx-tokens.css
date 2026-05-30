@@ -312,6 +312,257 @@
 
 
 /* =============================================================================
+   MOTION PREFERENCES
+   Respects prefers-reduced-motion: reduce. Disables all animations.
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =============================================================================
+   COMPONENT BASE STYLES
+   Semantic elements styled with design tokens.
+   Layer 1: Base styles for all HTML elements.
+   ============================================================================= */
+
+/* Headings — using display font + typographic scale */
+h1 {
+  font-family: var(--jj-font-display);
+  font-size: var(--jj-text-4xl);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-tight);
+  letter-spacing: var(--jj-tracking-tight);
+  margin: var(--jj-space-4) 0 var(--jj-space-2) 0;
+}
+
+h2 {
+  font-family: var(--jj-font-display);
+  font-size: var(--jj-text-3xl);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-tight);
+  letter-spacing: var(--jj-tracking-tight);
+  margin: var(--jj-space-4) 0 var(--jj-space-2) 0;
+}
+
+h3 {
+  font-family: var(--jj-font-display);
+  font-size: var(--jj-text-2xl);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-tight);
+  letter-spacing: var(--jj-tracking-tight);
+  margin: var(--jj-space-3) 0 var(--jj-space-1) 0;
+}
+
+h4 {
+  font-family: var(--jj-font-display);
+  font-size: var(--jj-text-xl);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-snug);
+  margin: var(--jj-space-2) 0 var(--jj-space-1) 0;
+}
+
+h5 {
+  font-family: var(--jj-font-display);
+  font-size: var(--jj-text-lg);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-snug);
+  margin: var(--jj-space-2) 0 var(--jj-space-1) 0;
+}
+
+h6 {
+  font-family: var(--jj-font-body);
+  font-size: var(--jj-text-md);
+  font-weight: var(--jj-weight-medium);
+  line-height: var(--jj-leading-snug);
+  text-transform: uppercase;
+  letter-spacing: var(--jj-tracking-wider);
+  margin: var(--jj-space-2) 0 var(--jj-space-1) 0;
+}
+
+/* Body text */
+p {
+  font-family: var(--jj-font-body);
+  font-size: var(--jj-text-base);
+  line-height: var(--jj-leading-normal);
+  margin: var(--jj-space-4) 0;
+}
+
+p + p {
+  margin-top: var(--jj-space-2);
+}
+
+/* Lists */
+ul, ol {
+  margin: var(--jj-space-4) 0;
+  padding-left: var(--jj-space-6);
+}
+
+li {
+  line-height: var(--jj-leading-normal);
+  margin: var(--jj-space-2) 0;
+}
+
+/* Links */
+a {
+  color: var(--jj-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--jj-duration-fast) var(--jj-ease);
+}
+
+a:hover {
+  color: var(--jj-accent-dark);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--jj-accent);
+  outline-offset: 2px;
+  border-radius: var(--jj-radius-sm);
+}
+
+/* Code */
+code {
+  font-family: var(--jj-font-code);
+  font-size: 0.95em;
+  background-color: var(--jj-bg-sunken);
+  padding: 0.125em 0.375em;
+  border-radius: var(--jj-radius-sm);
+}
+
+pre {
+  font-family: var(--jj-font-code);
+  font-size: var(--jj-text-sm);
+  line-height: 1.5;
+  background-color: var(--jj-bg-sunken);
+  border: var(--jj-border);
+  border-radius: var(--jj-radius-md);
+  padding: var(--jj-space-4);
+  overflow-x: auto;
+  margin: var(--jj-space-4) 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Figure / Captions */
+figure {
+  margin: var(--jj-space-6) 0;
+}
+
+figcaption {
+  font-family: var(--jj-font-body);
+  font-size: var(--jj-text-sm);
+  color: var(--jj-fg-muted);
+  text-align: center;
+  margin-top: var(--jj-space-2);
+}
+
+/* Card component */
+.bs-card {
+  background-color: var(--jj-bg-raised);
+  border: var(--jj-border);
+  border-radius: var(--jj-radius-lg);
+  padding: var(--jj-space-6);
+  transition: box-shadow var(--jj-duration-normal) var(--jj-ease);
+}
+
+.bs-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-category] .bs-card {
+  border-color: var(--jj-accent);
+  background-color: var(--jj-accent-light);
+}
+
+.bs-card-title {
+  color: var(--jj-accent);
+  margin: 0;
+}
+
+.bs-card-body {
+  margin: var(--jj-space-3) 0 0 0;
+}
+
+/* Section wrapper */
+.bs-section {
+  padding: var(--jj-space-6);
+  border-bottom: var(--jj-border);
+}
+
+.bs-section:last-child {
+  border-bottom: none;
+}
+
+/* Article container */
+article {
+  margin: var(--jj-space-6) 0;
+}
+
+/* Buttons & Interactive */
+button {
+  font-family: var(--jj-font-body);
+  font-size: var(--jj-text-md);
+  font-weight: var(--jj-weight-medium);
+  padding: var(--jj-space-2) var(--jj-space-4);
+  background-color: var(--jj-accent);
+  color: white;
+  border: none;
+  border-radius: var(--jj-radius-md);
+  cursor: pointer;
+  transition: background-color var(--jj-duration-fast) var(--jj-ease);
+}
+
+button:hover {
+  background-color: var(--jj-accent-dark);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--jj-accent-dark);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  background-color: var(--jj-fg-subtle);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Form inputs */
+input, textarea, select {
+  font-family: var(--jj-font-body);
+  font-size: var(--jj-text-base);
+  background-color: var(--jj-bg-sunken);
+  border: var(--jj-border);
+  border-radius: var(--jj-radius-md);
+  padding: var(--jj-space-2) var(--jj-space-3);
+  transition: border-color var(--jj-duration-fast) var(--jj-ease);
+}
+
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--jj-accent);
+  outline-offset: 1px;
+  border-color: var(--jj-accent);
+}
+
+/* Time/metadata */
+time {
+  font-size: var(--jj-text-sm);
+  color: var(--jj-fg-muted);
+}
+
+
+/* =============================================================================
    UTILITY CLASSES
    Convenience classes that reference tokens.
    These are optional — use tokens directly in component CSS where possible.
