@@ -160,11 +160,11 @@ a:hover { opacity: 0.75; }
   padding: var(--jj-space-3) var(--jj-space-6);
   display: flex; align-items: center;
   justify-content: space-between; gap: var(--jj-space-4);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .ic-nav-links {
   display: flex; gap: var(--jj-space-4);
-  flex-wrap: wrap; list-style: none;
+  list-style: none;
 }
 .ic-wrap {
   max-width: var(--jj-width-full);
@@ -580,6 +580,10 @@ canvas { display: block; image-rendering: pixelated; }
 }
 .ic-thumb:hover { border-color: var(--jj-fg); }
 .ic-thumb.active { border-color: var(--jj-fg); border-width: 2px; }
+
+@media (max-width: 520px) {
+  .ic-nav-links { display: none; }
+}
 </style>
 </head>
 <body>

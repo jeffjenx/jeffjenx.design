@@ -69,12 +69,11 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--jj-space-4);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   .bs-nav-links {
     display: flex;
     gap: var(--jj-space-4);
-    flex-wrap: wrap;
     list-style: none;
   }
   .bs-wrap {
@@ -169,7 +168,7 @@
   .bs-card {
     background: var(--jj-bg-raised);
     border: 1px solid var(--jj-border-color);
-    border-radius: var(--jj-radius-lg);
+    border-radius: 0;
     padding: var(--jj-space-6);
     display: flex;
     flex-direction: column;
@@ -219,7 +218,7 @@
   .bs-mark-surface {
     background: var(--jj-bg-raised);
     border: 1px solid var(--jj-border-color);
-    border-radius: var(--jj-radius-lg);
+    border-radius: 0;
     padding: var(--jj-space-6);
     display: flex;
     gap: var(--jj-space-8);
@@ -321,7 +320,7 @@
     gap: var(--jj-space-4);
     background: var(--jj-bg-raised);
     border: 1px solid var(--jj-border-color);
-    border-radius: var(--jj-radius-lg);
+    border-radius: 0;
     padding: var(--jj-space-3) var(--jj-space-4);
   }
 
@@ -353,7 +352,7 @@
   .bs-type-item {
     background: var(--jj-bg-raised);
     border: 1px solid var(--jj-border-color);
-    border-radius: var(--jj-radius-lg);
+    border-radius: 0;
     padding: var(--jj-space-4) var(--jj-space-5);
     display: flex;
     flex-direction: column;
@@ -423,6 +422,10 @@
     text-transform: uppercase;
     color: var(--jj-fg-subtle);
   }
+}
+
+@media (max-width: 520px) {
+  .bs-nav-links { display: none; }
 }
 </style>
 </head>
