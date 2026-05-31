@@ -331,6 +331,8 @@
    Layer 1: Base styles for all HTML elements.
    ============================================================================= */
 
+@layer base {
+
 /* Headings — using display font + typographic scale */
 h1 {
   font-family: var(--jj-font-display);
@@ -642,3 +644,5 @@ time {
   color: var(--jj-accent);
   text-transform: uppercase;
 }
+
+} /* end @layer base */
