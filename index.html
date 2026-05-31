@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeff Jenx Design System</title>
+<title>Jeff Jenx · Design System</title>
 <meta name="description" content="The Jeff Jenx design system provides brand strategy, UI components, and iconography for cohesive product design.">
 <meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -241,6 +241,20 @@
     border-color: var(--jj-fg);
     opacity: 1;
   }
+
+  #theme-toggle {
+    font-family: var(--jj-font-mono);
+    font-size: var(--jj-text-xs);
+    letter-spacing: var(--jj-tracking-wider);
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--jj-border-color);
+    color: var(--jj-fg-muted);
+    padding: 5px 11px;
+    cursor: pointer;
+  }
+
+  #theme-toggle:hover { background: var(--jj-bg-sunken); color: var(--jj-fg); }
 
   .idx-hero {
     border: 1px solid var(--jj-border-color);
@@ -512,7 +526,7 @@
     <li><a href="https://jeffjenx.net"    class="jj-nav-link">Network</a></li>
   </ul>
 
-  <button id="theme-toggle" class="jj-btn" type="button" aria-label="Toggle dark mode">Dark</button>
+  <button id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
 </nav>
 
 <main class="idx-wrap">
